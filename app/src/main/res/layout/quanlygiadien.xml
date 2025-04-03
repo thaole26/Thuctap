@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quản Lý Giá Điện"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <!-- Tìm kiếm bậc giá điện -->
+    <EditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tìm kiếm theo bậc giá hoặc khoảng điện"
+        android:padding="12dp"
+        android:inputType="text"/>
+
+    <!-- Danh sách giá điện -->
+    <RecyclerView
+        android:id="@+id/rvView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="16dp"/>
+
+    <!-- Nút thêm bậc giá điện mới -->
+    <Button
+        android:id="@+id/btnGia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Bậc Giá Điện Mới"
+        android:layout_marginTop="16dp"
+        android:onClick="onAddPrice"/>
+
+    <!-- Nút cập nhật bậc giá điện -->
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cập Nhật Giá Điện"
+        android:layout_marginTop="8dp"
+        android:onClick="onUpdatePrice"/>
+
+    <!-- Nút xóa bậc giá điện -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xóa Bậc Giá Điện"
+        android:layout_marginTop="8dp"
+        android:onClick="onDeletePrice"/>
+
+</LinearLayout>
