@@ -1,18 +1,12 @@
 package com.example.myapplication.Models;
 
 public class GiaDien {
-
-    private final int mabac;
-
-    private final String tenbac;
-
-    private final int tusokw;
-
-    private final int densokw;
-
-    private final double dongia;
-
-    private final String ngayapdung;
+    private int mabac;
+    private String tenbac;
+    private int tusokw;
+    private int densokw;
+    private double dongia;
+    private String ngayapdung;
 
 
     public GiaDien(int mabac, String tenbac, int tusokw, int densokw, double dongia, String ngayapdung) {

@@ -5,7 +5,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.APIService;
-import com.example.myapplication.KhachHangAdapter;
+import com.example.myapplication.Adapters.KhachHangAdapter;
 import com.example.myapplication.Models.KhachHang;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
@@ -58,7 +57,7 @@ public class QLKhachhangActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<KhachHang>> call, Response<List<KhachHang>> response) {
                 if (response.isSuccessful()) {
-                    List<KhachHang> list = response.body();
+                    list = response.body();
                     adapter = new KhachHangAdapter(list);
                     rvCustomerList.setAdapter(adapter);
                 } else {
@@ -85,6 +84,18 @@ public class QLKhachhangActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {}
+        });
+
+        btnAddCustomer.setOnClickListener(view -> {
+
+        });
+
+        btnDeleteCustomer.setOnClickListener(view -> {
+
+        });
+
+        btnUpdateCustomer.setOnClickListener(view -> {
+
         });
     }
 

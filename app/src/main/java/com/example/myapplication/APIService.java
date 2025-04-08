@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import com.example.myapplication.Models.DienKe;
+import com.example.myapplication.Models.GiaDien;
 import com.example.myapplication.Models.KhachHang;
 
 import java.util.List;
@@ -19,5 +21,11 @@ public interface APIService {
 
     @GET("khachhang")
     Call<List<KhachHang>> getAllKhachHang();
+
+    @GET("dienke")
+    Call<List<DienKe>> getAllDienKe();
+
+    @GET("giadien")
+    Call<List<GiaDien>> getAllGiaDien();
 
 }

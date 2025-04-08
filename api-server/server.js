@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 
+const dayjs = require('dayjs'); //date format
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -15,7 +17,8 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '1622003',
-    database: 'quanlytiendien_final' // Your DB name
+    database: 'quanlytiendien_final', // Your DB name
+    dateStrings: true  
 });
 
 db.connect((err) => {
@@ -26,7 +29,7 @@ db.connect((err) => {
     console.log('✅ Connected to MySQL');
 });
 
-app.get('/getAllNhanvien', (req, res) => {
+app.get('/nhanvien', (req, res) => {
     db.query('SELECT * FROM nhanvien', (err, results) => {
         if (err) return res.status(500).json({ error: err });
         res.json(results);
@@ -93,8 +96,37 @@ app.post('/login', (req, res) => {
 // GET all khachhang
 app.get('/khachhang', (req, res) => {
     db.query('SELECT * FROM khachhang', (err, results) => {
-        if (err) return res.status(500).json({ error: 'Lỗi lấy dữ liệu' });
+        if (err) return res.status(500).json({ error: 'Lỗi truy vấn dữ liệu' });
         res.json(results);
+    });
+});
+
+// GET all dienke
+app.get('/dienke', (req, res) => {
+    db.query('SELECT * FROM dienke', (err, result) => {
+        if (err) return res.status(500).json({ error: 'Lỗi truy vấn dữ liệu' });
+
+         // Format date fields
+        const formatted = result.map(item => ({
+            ...item,
+            ngaysx: item.ngaysx ? dayjs(item.ngaysx).format('DD/MM/YYYY') : null,
+            ngaylap: item.ngaylap ? dayjs(item.ngaylap).format('DD/MM/YYYY') : null
+        }));
+        res.json(formatted); 
+    });
+});
+
+// GET all giadien
+app.get('/giadien', (req, res) => {
+    db.query('SELECT * FROM giadien', (err, result) => {
+        if (err) return res.status(500).json({ error: 'Lỗi truy vấn dữ liệu' });
+
+         // Format date fields
+        const formatted = result.map(item => ({
+            ...item,
+            ngayapdung: item.ngayapdung ? dayjs(item.ngayapdung).format('DD/MM/YYYY') : null,
+        }));
+        res.json(formatted); 
     });
 });
 
