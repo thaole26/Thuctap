@@ -34,6 +34,14 @@
         android:minHeight="48dp"
         android:hint="Tên đăng nhập" />
 
+    <!-- Họ tên -->
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Họ tên nhân viên" />
+
     <EditText
         android:id="@+id/edtSDT"
         android:layout_width="match_parent"
