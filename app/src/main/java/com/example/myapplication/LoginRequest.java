@@ -1,8 +1,8 @@
 package com.example.myapplication;
 
 public class LoginRequest {
-    private String tendangnhap;
-    private String matkhau;
+    private final String tendangnhap;
+    private final String matkhau;
 
     public LoginRequest(String tendangnhap, String matkhau) {
         this.tendangnhap = tendangnhap;

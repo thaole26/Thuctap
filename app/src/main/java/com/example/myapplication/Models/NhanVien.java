@@ -1,6 +1,6 @@
 package com.example.myapplication.Models;
 
-public class Nhanvien {
+public class NhanVien {
     private int manv;
     private String tendangnhap;
     private String matkhau_hash;
@@ -10,10 +10,10 @@ public class Nhanvien {
     private int quyen;
     private int trangthai;
 
-    public Nhanvien() {
+    public NhanVien() {
     }
 
-    public Nhanvien(int manv, String tendangnhap, String matkhau_hash, String hoten, String email, String sdt, int quyen, int trangthai) {
+    public NhanVien(int manv, String tendangnhap, String matkhau_hash, String hoten, String email, String sdt, int quyen, int trangthai) {
         this.manv = manv;
         this.tendangnhap = tendangnhap;
         this.matkhau_hash = matkhau_hash;

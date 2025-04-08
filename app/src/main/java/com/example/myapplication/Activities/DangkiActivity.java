@@ -61,7 +61,7 @@ public class DangkiActivity extends AppCompatActivity {
 
                     APIService apiService = RetrofitClient.getInstance().create(APIService.class);
                     RegisterRequest registerRequest = new RegisterRequest(username, name, sdt, email, matkhau);
-                    apiService.dangkiNhanvien(registerRequest).enqueue(new Callback<>() {
+                    apiService.dangkiNhanVien(registerRequest).enqueue(new Callback<>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {

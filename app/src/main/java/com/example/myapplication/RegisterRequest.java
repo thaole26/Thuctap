@@ -1,11 +1,11 @@
 package com.example.myapplication;
 
 public class RegisterRequest {
-    private String tendangnhap;
-    private String hoten;
-    private String sdt;
-    private String email;
-    private String matkhau;
+    private final String tendangnhap;
+    private final String hoten;
+    private final String sdt;
+    private final String email;
+    private final String matkhau;
 
     public RegisterRequest(String tendangnhap,String hoten, String sdt, String email, String matkhau) {
         this.tendangnhap = tendangnhap;

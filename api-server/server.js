@@ -89,6 +89,15 @@ app.post('/login', (req, res) => {
     });
 });
 
+
+// GET all khachhang
+app.get('/khachhang', (req, res) => {
+    db.query('SELECT * FROM khachhang', (err, results) => {
+        if (err) return res.status(500).json({ error: 'Lỗi lấy dữ liệu' });
+        res.json(results);
+    });
+});
+
 app.listen(3000, '0.0.0.0', () => {
     console.log('🚀 Server running on http://0.0.0.0:3000');
 });

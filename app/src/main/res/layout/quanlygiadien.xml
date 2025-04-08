@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/main"
     android:padding="16dp">
 
     <!-- Tiêu đề -->
@@ -26,7 +27,7 @@
         android:inputType="text"/>
 
     <!-- Danh sách giá điện -->
-    <RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

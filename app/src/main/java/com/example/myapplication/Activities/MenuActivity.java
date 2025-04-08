@@ -38,6 +38,26 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        btnCustomer.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuActivity.this, QLKhachhangActivity.class);
+            startActivity(intent);
+        });
+
+        btnPrice.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuActivity.this, QLGiadienActivity.class);
+            startActivity(intent);
+        });
+
+        btnMeter.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuActivity.this, QLDienkeActivity.class);
+            startActivity(intent);
+        });
+
+        btnInvoice.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuActivity.this, QLHoadonActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void addControls() {
