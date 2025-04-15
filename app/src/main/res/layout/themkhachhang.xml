@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/add_customer_layout"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvAddCustomerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Khách Hàng Mới"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <!-- Mã khách hàng -->
+    <EditText
+        android:id="@+id/edtCustomerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã khách hàng"
+        android:padding="12dp"
+        android:inputType="text"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Tên khách hàng -->
+    <EditText
+        android:id="@+id/edtCustomerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên khách hàng"
+        android:padding="12dp"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Số điện thoại -->
+    <EditText
+        android:id="@+id/edtCustomerPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại"
+        android:padding="12dp"
+        android:inputType="phone"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Địa chỉ -->
+    <EditText
+        android:id="@+id/edtCustomerAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Địa chỉ"
+        android:padding="12dp"
+        android:inputType="textPostalAddress"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Thông báo lỗi (ẩn mặc định) -->
+    <TextView
+        android:id="@+id/tvErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Khách hàng đã tồn tại!"
+        android:textColor="#FF0000"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Nút lưu khách hàng -->
+    <Button
+        android:id="@+id/btnSaveCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu Khách Hàng"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Nút quay lại -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quay Lại"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/logo"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng Ký"
+        android:textSize="39sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Tên đăng nhập -->
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Tên đăng nhập" />
+
+    <!-- Họ tên -->
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Họ tên nhân viên" />
+
+    <EditText
+        android:id="@+id/edtSDT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Số điện thoại"
+        android:inputType="textEmailAddress" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <!-- Mật khẩu -->
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword" />
+
+    <!-- Nhập lại mật khẩu -->
+    <EditText
+        android:id="@+id/edtConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Nhập lại mật khẩu"
+        android:inputType="textPassword" />
+
+    <!-- Nút đăng ký -->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký"
+        android:layout_marginTop="10dp" />
+
+    <!-- Quay lại đăng nhập -->
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đã có tài khoản? Đăng nhập ngay"
+        android:textColor="@android:color/holo_blue_dark"
+        android:paddingTop="10dp"
+        android:textSize="14sp"
+        android:minHeight="48dp"
+        android:clickable="true"
+        android:focusable="true" />
+</LinearLayout>
