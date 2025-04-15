@@ -12,7 +12,9 @@
         android:text="Quản lý Điện Kế"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="16dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
 
     <EditText
         android:id="@+id/edtSearchMeter"
@@ -20,7 +22,7 @@
         android:layout_height="wrap_content"
         android:hint="Tìm kiếm điện kế"
         android:drawableLeft="@android:drawable/ic_menu_search"
-        android:padding="10dp" />
+        android:padding="10dp"/>
 
     <Button
         android:id="@+id/btnAddMeter"
@@ -29,13 +31,14 @@
         android:text="Thêm Điện Kế"
         android:drawableLeft="@android:drawable/ic_menu_add"
         android:padding="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"/>
 
     <ListView
         android:id="@+id/lvMeters"
         android:layout_width="match_parent"
-        android:layout_height="435dp"
-        android:layout_marginTop="10dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,16 +54,9 @@
             android:layout_marginEnd="10dp"
             android:drawableLeft="@android:drawable/ic_menu_edit"
             android:padding="10dp"
-            android:text="Sửa" />
+            android:text="Sửa"
+            android:enabled="false"/>
 
-        <Button
-            android:id="@+id/btnDeleteMeter"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:drawableLeft="@android:drawable/ic_menu_delete"
-            android:padding="10dp"
-            android:text="Xóa" />
     </LinearLayout>
 
 </LinearLayout>

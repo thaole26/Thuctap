@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/update_meter_layout"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sửa Thông Tin Điện Kế"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Mã điện kế -->
+    <EditText
+        android:id="@+id/edtUpdateMeterId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã điện kế"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"
+        android:enabled="false"/>
+
+    <!-- Loại điện kế -->
+    <EditText
+        android:id="@+id/edtUpdateMeterType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày sản xuất"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Ngày lắp đặt -->
+    <EditText
+        android:id="@+id/edtUpdateInstallationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày lắp đặt (dd/MM/yyyy)"
+        android:padding="10dp"
+        android:inputType="date"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Vị trí lắp đặt -->
+    <EditText
+        android:id="@+id/edtUpdateInstallationLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vị trí lắp đặt"
+        android:padding="10dp"
+        android:inputType="textPostalAddress"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:id="@+id/edtMT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:id="@+id/edtTT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Trạng thái"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Thông báo lỗi khi trùng dữ liệu (ẩn mặc định) -->
+    <TextView
+        android:id="@+id/tvUpdateErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Điện kế đã tồn tại!"
+        android:textColor="#FF0000"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Nút lưu thông tin đã sửa -->
+    <Button
+        android:id="@+id/btnSaveUpdatedMeter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu Thông Tin"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Nút quay lại -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quay Lại"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

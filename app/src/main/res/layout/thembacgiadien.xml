@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/add_price_tier_layout"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm Bậc Giá Điện"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Mã bậc -->
+    <EditText
+        android:id="@+id/edtTierId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã bậc"
+        android:padding="12dp"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Tên bậc -->
+    <EditText
+        android:id="@+id/edtTierName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên bậc"
+        android:padding="12dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Từ số kW -->
+    <EditText
+        android:id="@+id/edtStartKw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Từ số kW"
+        android:padding="12dp"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Đến số kW -->
+    <EditText
+        android:id="@+id/edtEndKw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Đến số kW"
+        android:padding="13dp"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Đơn giá -->
+    <EditText
+        android:id="@+id/edtUnitPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Đơn giá"
+        android:padding="12dp"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Ngày áp dụng -->
+    <EditText
+        android:id="@+id/edtEffectiveDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày áp dụng (dd/MM/yyyy)"
+        android:padding="12dp"
+        android:inputType="date"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Thông báo lỗi khi dữ liệu không hợp lệ (ẩn mặc định) -->
+    <TextView
+        android:id="@+id/tvAddErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dữ liệu không hợp lệ hoặc bậc giá bị trùng!"
+        android:textColor="#FF0000"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Nút lưu bậc giá -->
+    <Button
+        android:id="@+id/btnSavePriceTier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu Bậc Giá"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Nút quay lại -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quay Lại"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

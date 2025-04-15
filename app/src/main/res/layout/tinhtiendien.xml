@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/calculate_bill_layout"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tính Tiền Điện"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Mã điện kế -->
+    <EditText
+        android:id="@+id/edtMeterId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã điện kế"
+        android:padding="12dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Chỉ số cũ -->
+    <EditText
+        android:id="@+id/edtOldReading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chỉ số cũ (kW)"
+        android:padding="12dp"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Chỉ số mới -->
+    <EditText
+        android:id="@+id/edtNewReading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chỉ số mới (kW)"
+        android:padding="12dp"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Nút tính tiền -->
+    <Button
+        android:id="@+id/btnCalculateBill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tính Tiền"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Tổng điện tiêu thụ -->
+    <TextView
+        android:id="@+id/tvTotalConsumption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tổng điện tiêu thụ: 0 kW"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"/>
+
+    <!-- Số tiền phải trả -->
+    <TextView
+        android:id="@+id/tvTotalAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Số tiền phải trả: 0 VNĐ"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"/>
+
+    <!-- Thông báo lỗi (ẩn mặc định) -->
+    <TextView
+        android:id="@+id/tvErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Không tìm thấy điện kế hoặc dữ liệu không hợp lệ!"
+        android:textColor="#FF0000"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Nút quay lại -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quay Lại"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>
