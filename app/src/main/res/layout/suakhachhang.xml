@@ -56,6 +56,15 @@
         android:hint="Địa chỉ"
         android:padding="12dp"
         android:inputType="textPostalAddress"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- CMND -->
+    <EditText
+        android:id="@+id/edtUpdateCustomerIDNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CMND"
+        android:padding="12dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Thông báo lỗi khi trùng dữ liệu (ẩn mặc định) -->
@@ -63,7 +72,6 @@
         android:id="@+id/tvUpdateErrorMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thông tin khách hàng đã tồn tại!"
         android:textColor="#FF0000"
         android:gravity="center"
         android:visibility="gone"

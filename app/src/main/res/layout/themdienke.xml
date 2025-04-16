@@ -27,7 +27,17 @@
         android:inputType="text"
         android:layout_marginBottom="10dp"/>
 
-    <!-- Loại điện kế -->
+    <!-- Mã khách hàng -->
+    <EditText
+        android:id="@+id/edtMeterCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã khách hàng"
+        android:padding="12dp"
+        android:inputType="text"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Ngày sản xuất -->
     <EditText
         android:id="@+id/edtMeterType"
         android:layout_width="match_parent"

@@ -3,6 +3,8 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const dayjs = require('dayjs'); //date format
+const customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 
 const app = express();
 app.use(cors());
@@ -18,7 +20,7 @@ const db = mysql.createConnection({
     user: 'root',
     password: '1622003',
     database: 'quanlytiendien_final', // Your DB name
-    dateStrings: true  
+    dateStrings: true
 });
 
 db.connect((err) => {
@@ -51,7 +53,7 @@ app.post('/register', (req, res) => {
             db.query('SELECT * FROM nhanvien WHERE email = ?', [email], (err, isNew) => {
                 if (err) return res.status(500).json({ error: err });
                 if (isNew.length !== 0) return res.status(409).json({ message: 'Email đã được sử dụng' });
-                
+
                 register();
             });
         } else register();
@@ -106,13 +108,13 @@ app.get('/dienke', (req, res) => {
     db.query('SELECT * FROM dienke', (err, result) => {
         if (err) return res.status(500).json({ error: 'Lỗi truy vấn dữ liệu' });
 
-         // Format date fields
+        // Format date fields
         const formatted = result.map(item => ({
             ...item,
             ngaysx: item.ngaysx ? dayjs(item.ngaysx).format('DD/MM/YYYY') : null,
             ngaylap: item.ngaylap ? dayjs(item.ngaylap).format('DD/MM/YYYY') : null
         }));
-        res.json(formatted); 
+        res.json(formatted);
     });
 });
 
@@ -121,12 +123,95 @@ app.get('/giadien', (req, res) => {
     db.query('SELECT * FROM giadien', (err, result) => {
         if (err) return res.status(500).json({ error: 'Lỗi truy vấn dữ liệu' });
 
-         // Format date fields
+        // Format date fields
         const formatted = result.map(item => ({
             ...item,
             ngayapdung: item.ngayapdung ? dayjs(item.ngayapdung).format('DD/MM/YYYY') : null,
         }));
-        res.json(formatted); 
+        res.json(formatted);
+    });
+});
+
+// Add new khachhang
+app.post('/khachhang', (req, res) => {
+    const { makh, tenkh, dt, diachi, cmnd } = req.body;
+
+    db.query('SELECT * FROM khachhang WHERE makh = ?', [makh], (err, results) => {
+        if (err) return res.status(500).json({ error: err });
+        if (results.length !== 0) return res.status(409).json({ message: 'Mã nhân viên này đã được sử dụng' });
+
+        db.query('SELECT * FROM khachhang WHERE cmnd = ?', [cmnd], (err, results) => {
+            if (err) return res.status(500).json({ error: err });
+            if (results.length !== 0) return res.status(409).json({ message: 'CMND này đã được sử dụng' });
+
+            db.query('INSERT INTO khachhang (makh, tenkh, dt, diachi, cmnd) VALUES (?, ?, ?, ?, ?)',
+                [makh, tenkh, dt, diachi, cmnd], (err, result) => {
+                    if (err) return res.status(500).json({ error: err });
+                    return res.status(200).json({ message: 'Thêm khách hàng thành công' });
+                });
+        });
+    });
+});
+
+// Update khachhang
+app.put('/khachhang/:makh', (req, res) => {
+    const makh = req.params.makh;
+    const { tenkh, dt, diachi, cmnd } = req.body;
+
+    db.query('SELECT * FROM khachhang WHERE cmnd = ?', [cmnd], (err, results) => {
+        if (err) return res.status(500).json({ error: err });
+        if (results.length !== 0) return res.status(409).json({ message: 'CMND này đã được sử dụng' });
+
+        const query = `
+        UPDATE khachhang 
+        SET tenkh = ?, dt = ?, diachi = ?, cmnd = ? 
+        WHERE makh = ?`;
+
+        db.query(query, [tenkh, dt, diachi, cmnd, makh], (err, result) => {
+            if (err) return res.status(500).json({ error: err });
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ message: 'Không tìm thấy khách hàng' });
+            }
+
+            res.status(200).json({ message: 'Cập nhật khách hàng thành công' });
+        });
+    });
+});
+
+// Add new dienke
+app.post('/dienke', (req, res) => {
+    const { madk, makh, ngaysx, ngaylap, diachi_lapdat, mota, trangthai } = req.body;
+
+    db.query('SELECT * FROM dienke WHERE madk = ?', [madk], (err, results) => {
+        if (err) return res.status(500).json({ error: err });
+        if (results.length !== 0) return res.status(409).json({ message: 'Mã điện kế đã tồn tại' });
+
+        db.query('SELECT * FROM khachhang WHERE makh = ?', [makh], (err, results) => {
+            if (err) return res.status(500).json({ error: err });
+            if (results.length === 0) return res.status(404).json({ message: 'Không tìm thấy khách hàng' });
+    
+            const format = 'DD/MM/YYYY';
+            const parsedNgaySX = dayjs(ngaysx, format);
+            const parsedNgayLap = dayjs(ngaylap, format);
+            // Parse and format with dayjs
+            if (!parsedNgaySX.isValid() || !parsedNgayLap.isValid()) {
+                return res.status(400).json({ message: 'Ngày không hợp lệ. Định dạng đúng là dd/MM/yyyy' });
+            }
+
+            const formattedNgaySX = parsedNgaySX.format('YYYY-MM-DD HH:mm:ss');
+            const formattedNgayLap = parsedNgayLap.format('YYYY-MM-DD HH:mm:ss');
+
+            const query = `
+                INSERT INTO dienke (madk, makh, ngaysx, ngaylap, diachi_lapdat, mota, trangthai)
+                VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+            db.query(query, [madk, makh, formattedNgaySX, formattedNgayLap, diachi_lapdat || null, mota || null, trangthai || 0], (err, result) => {
+                    if (err) return res.status(500).json({ error: err });
+
+                res.status(200).json({ message: 'Thêm điện kế thành công' });
+            });
+        });
     });
 });
 

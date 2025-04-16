@@ -1,5 +1,6 @@
 package com.example.myapplication.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -7,6 +8,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -46,10 +49,11 @@ public class QLDienkeActivity extends AppCompatActivity {
         });
 
         addControls();
+        getAllDienke();
         addEvents();
     }
 
-    private void addEvents() {
+    private void getAllDienke() {
         APIService apiService = RetrofitClient.getInstance().create(APIService.class);
 
         apiService.getAllDienKe().enqueue(new Callback<>() {
@@ -71,11 +75,24 @@ public class QLDienkeActivity extends AppCompatActivity {
         });
     }
 
+    private void addEvents() {
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        getAllDienke();
+                    }
+                });
+
+        btnAddMeter.setOnClickListener(view -> {
+            Intent intent = new Intent(QLDienkeActivity.this, ThemDienkeActivity.class);
+            launcher.launch(intent);
+        });
+    }
+
     private void addControls() {
         edtSearchMeter = findViewById(R.id.edtSearchMeter);
         btnAddMeter = findViewById(R.id.btnAddMeter);
         btnEditMeter = findViewById(R.id.btnEditMeter);
-        btnDeleteMeter = findViewById(R.id.btnDeleteMeter);
         lvMeters = findViewById(R.id.lvMeters);
         list = new ArrayList<>();
         adapter = new DienKeAdapter(this,list);

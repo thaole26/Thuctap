@@ -1,5 +1,6 @@
 package com.example.myapplication.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -47,28 +50,16 @@ public class QLKhachhangActivity extends AppCompatActivity {
         });
 
         addControls();
+        getAllKhachHang();
         addEvents();
     }
 
     private void addEvents() {
-        APIService apiService = RetrofitClient.getInstance().create(APIService.class);
-
-        apiService.getAllKhachHang().enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<List<KhachHang>> call, Response<List<KhachHang>> response) {
-                if (response.isSuccessful()) {
-                    list = response.body();
-                    adapter = new KhachHangAdapter(list);
-                    rvCustomerList.setAdapter(adapter);
-                } else {
-                    Toast.makeText(QLKhachhangActivity.this, "Lỗi: " + response.code(), Toast.LENGTH_SHORT).show();
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    getAllKhachHang();
                 }
-            }
-
-            @Override
-            public void onFailure(Call<List<KhachHang>> call, Throwable t) {
-                Toast.makeText(QLKhachhangActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         });
 
         edtSearchCustomer.addTextChangedListener(new TextWatcher() {
@@ -87,7 +78,8 @@ public class QLKhachhangActivity extends AppCompatActivity {
         });
 
         btnAddCustomer.setOnClickListener(view -> {
-
+            Intent intent = new Intent(QLKhachhangActivity.this, ThemKhachhangActivity.class);
+            launcher.launch(intent);
         });
 
         btnDeleteCustomer.setOnClickListener(view -> {
@@ -95,7 +87,30 @@ public class QLKhachhangActivity extends AppCompatActivity {
         });
 
         btnUpdateCustomer.setOnClickListener(view -> {
+            Intent intent = new Intent(QLKhachhangActivity.this, ThemKhachhangActivity.class);
+            startActivity(intent);
+        });
+    }
 
+    private void getAllKhachHang() {
+        APIService apiService = RetrofitClient.getInstance().create(APIService.class);
+
+        apiService.getAllKhachHang().enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<List<KhachHang>> call, Response<List<KhachHang>> response) {
+                if (response.isSuccessful()) {
+                    list = response.body();
+                    adapter = new KhachHangAdapter(list);
+                    rvCustomerList.setAdapter(adapter);
+                } else {
+                    Toast.makeText(QLKhachhangActivity.this, "Lỗi: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<KhachHang>> call, Throwable t) {
+                Toast.makeText(QLKhachhangActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

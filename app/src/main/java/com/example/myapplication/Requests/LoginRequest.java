@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Requests;
 
 public class LoginRequest {
     private final String tendangnhap;

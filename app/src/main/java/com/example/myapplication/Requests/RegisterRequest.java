@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Requests;
 
 public class RegisterRequest {
     private final String tendangnhap;

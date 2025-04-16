@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.APIService;
 import com.example.myapplication.R;
-import com.example.myapplication.RegisterRequest;
+import com.example.myapplication.Requests.RegisterRequest;
 import com.example.myapplication.RetrofitClient;
 
 import retrofit2.Call;

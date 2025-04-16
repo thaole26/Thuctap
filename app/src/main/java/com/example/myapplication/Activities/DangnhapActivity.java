@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.APIService;
-import com.example.myapplication.LoginRequest;
+import com.example.myapplication.Requests.LoginRequest;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
 
