@@ -1,101 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/calculate_bill_layout"
     android:padding="16dp">
 
     <!-- Tiêu đề -->
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tính Tiền Điện"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp"
         android:gravity="center"
-        android:layout_gravity="center_horizontal"/>
+        android:paddingBottom="16dp"/>
+
+    <!-- Mã hóa đơn -->
+    <TextView
+        android:id="@+id/tvInvoiceId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mã hóa đơn: "
+        android:padding="12dp"
+        android:textSize="16sp"/>
 
     <!-- Mã điện kế -->
-    <EditText
-        android:id="@+id/edtMeterId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mã điện kế"
-        android:padding="12dp"
-        android:inputType="text"
-        android:layout_marginBottom="10dp"/>
-
-    <!-- Chỉ số cũ -->
-    <EditText
-        android:id="@+id/edtOldReading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Chỉ số cũ (kW)"
-        android:padding="12dp"
-        android:inputType="number"
-        android:layout_marginBottom="10dp"/>
-
-    <!-- Chỉ số mới -->
-    <EditText
-        android:id="@+id/edtNewReading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Chỉ số mới (kW)"
-        android:padding="12dp"
-        android:inputType="number"
-        android:layout_marginBottom="10dp"/>
-
-    <!-- Nút tính tiền -->
-    <Button
-        android:id="@+id/btnCalculateBill"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tính Tiền"
-        android:padding="10dp"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Tổng điện tiêu thụ -->
     <TextView
-        android:id="@+id/tvTotalConsumption"
+        android:id="@+id/tvMeterId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tổng điện tiêu thụ: 0 kW"
+        android:text="Mã điện kế: "
+        android:padding="12dp"
         android:textSize="16sp"
-        android:padding="10dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"/>
+        android:layout_marginTop="8dp"/>
 
-    <!-- Số tiền phải trả -->
+    <!-- Kỳ hóa đơn -->
+    <TextView
+        android:id="@+id/tvPeriod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kỳ hóa đơn: "
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Chỉ số đầu -->
+    <TextView
+        android:id="@+id/tvStartIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chỉ số đầu: "
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Chỉ số cuối -->
+    <TextView
+        android:id="@+id/tvEndIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chỉ số cuối: "
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Số kWh tiêu thụ -->
+    <TextView
+        android:id="@+id/tvConsumption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Số kWh tiêu thụ: "
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Tổng tiền -->
     <TextView
         android:id="@+id/tvTotalAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Số tiền phải trả: 0 VNĐ"
-        android:textSize="16sp"
-        android:padding="10dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone"/>
+        android:text="Tổng tiền: "
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
 
-    <!-- Thông báo lỗi (ẩn mặc định) -->
-    <TextView
-        android:id="@+id/tvErrorMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Không tìm thấy điện kế hoặc dữ liệu không hợp lệ!"
-        android:textColor="#FF0000"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Nút quay lại -->
+    <!-- Nút tính tiền -->
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnCalculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quay Lại"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"/>
+        android:text="Tính Tiền"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_edit"/>
+
+    <!-- Nút lưu tổng tiền -->
+    <Button
+        android:id="@+id/btnSaveTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu Tổng Tiền"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_save"/>
+
+    <!-- Nút hủy -->
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hủy"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#6D6D6D"
+        android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"/>
 
 </LinearLayout>

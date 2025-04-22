@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chi Tiết Hóa Đơn"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="16dp"/>
+
+        <!-- Mã hóa đơn -->
+        <TextView
+            android:id="@+id/tvInvoiceId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mã hóa đơn: "
+            android:padding="12dp"
+            android:textSize="16sp"/>
+
+        <!-- Mã điện kế -->
+        <TextView
+            android:id="@+id/tvMeterId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mã điện kế: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Tên khách hàng -->
+        <TextView
+            android:id="@+id/tvCustomerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên khách hàng: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Địa chỉ khách hàng -->
+        <TextView
+            android:id="@+id/tvCustomerAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Kỳ hóa đơn -->
+        <TextView
+            android:id="@+id/tvPeriod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kỳ hóa đơn: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Từ ngày -->
+        <TextView
+            android:id="@+id/tvFromDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Từ ngày: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Đến ngày -->
+        <TextView
+            android:id="@+id/tvToDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đến ngày: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Chỉ số đầu -->
+        <TextView
+            android:id="@+id/tvStartIndex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chỉ số đầu: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Chỉ số cuối -->
+        <TextView
+            android:id="@+id/tvEndIndex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chỉ số cuối: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Tổng tiền -->
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tổng tiền: "
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Tình trạng -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tình trạng: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Ghi chú -->
+        <TextView
+            android:id="@+id/tvNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ghi chú: "
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Nút quay lại -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quay Lại"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/design_default_color_secondary_variant"
+            android:drawableLeft="@android:drawable/ic_menu_revert"/>
+
+    </LinearLayout>
+</ScrollView>

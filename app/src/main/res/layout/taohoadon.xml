@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lập Hóa Đơn Mới"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="16dp"/>
+
+        <!-- Mã hóa đơn -->
+        <EditText
+            android:id="@+id/edtInvoiceId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mã hóa đơn (mahd)"
+            android:padding="12dp"
+            android:inputType="text"
+            android:drawableLeft="@android:drawable/ic_menu_info_details"/>
+
+        <!-- Mã điện kế -->
+        <EditText
+            android:id="@+id/edtMeterId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mã điện kế (madk)"
+            android:padding="12dp"
+            android:inputType="text"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_search"/>
+
+        <!-- Kỳ hóa đơn -->
+        <EditText
+            android:id="@+id/edtPeriod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kỳ hóa đơn (MM/YYYY)"
+            android:padding="12dp"
+            android:inputType="text"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_recent_history"/>
+
+        <!-- Từ ngày -->
+        <EditText
+            android:id="@+id/edtFromDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Từ ngày (YYYY-MM-DD)"
+            android:padding="12dp"
+            android:inputType="date"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_day"/>
+
+        <!-- Đến ngày -->
+        <EditText
+            android:id="@+id/edtToDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Đến ngày (YYYY-MM-DD)"
+            android:padding="12dp"
+            android:inputType="date"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_day"/>
+
+        <!-- Chỉ số đầu -->
+        <EditText
+            android:id="@+id/edtStartIndex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Chỉ số đầu (chisodau)"
+            android:padding="12dp"
+            android:inputType="number"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_sort_by_size"/>
+
+        <!-- Chỉ số cuối -->
+        <EditText
+            android:id="@+id/edtEndIndex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Chỉ số cuối (chisocuoi)"
+            android:padding="12dp"
+            android:inputType="number"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_sort_by_size"/>
+
+        <!-- Ghi chú -->
+        <EditText
+            android:id="@+id/edtNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ghi chú (ghichu)"
+            android:padding="12dp"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:layout_marginTop="12dp"
+            android:drawableLeft="@android:drawable/ic_menu_edit"/>
+
+        <!-- Nút lưu hóa đơn -->
+        <Button
+            android:id="@+id/btnSaveInvoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lưu Hóa Đơn"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/design_default_color_secondary_variant"
+            android:drawableLeft="@android:drawable/ic_menu_save"/>
+
+        <!-- Nút hủy -->
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#6D6D6D"
+            android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"/>
+
+    </LinearLayout>
+</ScrollView>

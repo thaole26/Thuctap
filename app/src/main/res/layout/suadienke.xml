@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mã điện kế"
-        android:padding="10dp"
+        android:padding="12dp"
         android:inputType="text"
         android:layout_marginBottom="10dp"
         android:enabled="false"/>
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ngày sản xuất"
-        android:padding="10dp"
+        android:padding="12dp"
         android:inputType="text"
         android:layout_marginBottom="10dp"/>
 
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ngày lắp đặt (dd/MM/yyyy)"
-        android:padding="10dp"
+        android:padding="12dp"
         android:inputType="date"
         android:layout_marginBottom="10dp"/>
 
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Vị trí lắp đặt"
-        android:padding="10dp"
+        android:padding="12dp"
         android:inputType="textPostalAddress"
         android:layout_marginBottom="10dp"/>
     <EditText
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mô tả"
-        android:padding="10dp"
+        android:padding="12dp"
         android:inputType="text"
         android:layout_marginBottom="10dp"/>
     <EditText
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Trạng thái"
-        android:padding="10dp"
+        android:padding="12dp"
         android:inputType="text"
         android:layout_marginBottom="10dp"/>
 
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lưu Thông Tin"
-        android:padding="10dp"
+        android:padding="12dp"
         android:layout_marginTop="10dp"/>
 
     <!-- Nút quay lại -->

@@ -1,128 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/main"
     android:padding="16dp">
 
+    <!-- Tiêu đề -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quản lý Hóa Đơn Và Tính Tiền Điện"
-        android:textSize="22sp"
+        android:text="Quản Lý Hóa Đơn Và Tính Tiền Điện"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp" />
+        android:gravity="center"
+        android:paddingBottom="16dp"/>
 
+    <!-- Tìm kiếm hóa đơn -->
     <EditText
         android:id="@+id/edtSearchInvoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tìm kiếm hóa đơn"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        android:padding="10dp" />
+        android:hint="Tìm kiếm theo mã hóa đơn, mã điện kế, kỳ"
+        android:padding="12dp"
+        android:inputType="text"
+        android:drawableLeft="@android:drawable/ic_menu_search"/>
 
-    <Button
-        android:id="@+id/btnGenerateInvoice"
+    <!-- Danh sách hóa đơn -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInvoiceList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tạo Hóa Đơn"
-        android:drawableLeft="@android:drawable/ic_menu_add"
-        android:padding="10dp"
-        android:layout_marginTop="10dp" />
-
-    <ListView
-        android:id="@+id/lvInvoices"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thông tin hóa đơn"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:paddingTop="16dp" />
 
-    <EditText
-        android:id="@+id/edtInvoiceNumber"
+    <!-- Nút lập hóa đơn mới -->
+    <Button
+        android:id="@+id/btnCreateInvoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mã số hóa đơn" />
+        android:text="Lập Hóa Đơn Mới"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_add"/>
 
-    <EditText
-        android:id="@+id/edtCustomerName"
+    <!-- Nút tính tiền điện -->
+    <Button
+        android:id="@+id/btnCalculateBill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên khách hàng" />
+        android:text="Tính Tiền Điện"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_edit"/>
 
-    <EditText
-        android:id="@+id/edtCustomerAddress"
+    <!-- Nút xem chi tiết hóa đơn -->
+    <Button
+        android:id="@+id/btnViewInvoiceDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Địa chỉ" />
+        android:text="Xem Chi Tiết Hóa Đơn"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_info_details"/>
 
-    <EditText
-        android:id="@+id/edtInvoicePeriod"
+    <!-- Nút xóa hóa đơn -->
+    <Button
+        android:id="@+id/btnDeleteInvoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Kỳ hóa đơn" />
-
-    <EditText
-        android:id="@+id/edtStartDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Từ ngày" />
-
-    <EditText
-        android:id="@+id/edtEndDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Đến ngày" />
-
-    <EditText
-        android:id="@+id/edtStartIndex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Chỉ số đầu" />
-
-    <EditText
-        android:id="@+id/edtEndIndex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Chỉ số cuối" />
-
-    <EditText
-        android:id="@+id/edtTotalAmount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tổng tiền phải trả" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="10dp">
-
-        <Button
-            android:id="@+id/btnEditInvoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sửa"
-            android:drawableLeft="@android:drawable/ic_menu_edit"
-            android:padding="10dp"
-            android:layout_marginEnd="10dp" />
-
-        <Button
-            android:id="@+id/btnDeleteInvoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Xóa"
-            android:drawableLeft="@android:drawable/ic_menu_delete"
-            android:padding="10dp"
-            android:backgroundTint="@android:color/holo_red_light" />
-    </LinearLayout>
+        android:text="Xóa Hóa Đơn"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_delete"/>
 
 </LinearLayout>

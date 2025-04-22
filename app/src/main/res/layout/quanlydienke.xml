@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/main"
     android:padding="16dp">
 
+    <!-- Tiêu đề -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quản lý Điện Kế"
-        android:textSize="22sp"
+        android:text="Quản Lý Điện Kế"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp"
         android:gravity="center"
-        android:layout_gravity="center_horizontal"/>
+        android:paddingBottom="16dp"/>
 
+    <!-- Tìm kiếm điện kế -->
     <EditText
         android:id="@+id/edtSearchMeter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tìm kiếm điện kế"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        android:padding="10dp"/>
+        android:hint="Tìm kiếm theo mã điện kế, mã khách hàng"
+        android:padding="12dp"
+        android:inputType="text"
+        android:drawableLeft="@android:drawable/ic_menu_search"/>
 
+    <!-- Danh sách điện kế -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMeterList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="16dp" />
+
+    <!-- Nút thêm điện kế mới -->
     <Button
         android:id="@+id/btnAddMeter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm Điện Kế"
-        android:drawableLeft="@android:drawable/ic_menu_add"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"/>
+        android:text="Thêm Điện Kế Mới"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_add"/>
 
-    <ListView
-        android:id="@+id/lvMeters"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp"/>
-
-    <LinearLayout
+    <!-- Nút cập nhật thông tin điện kế -->
+    <Button
+        android:id="@+id/btnUpdateMeter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:text="Cập Nhật Thông Tin Điện Kế"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_edit"/>
 
-        <Button
-            android:id="@+id/btnEditMeter"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:drawableLeft="@android:drawable/ic_menu_edit"
-            android:padding="10dp"
-            android:text="Sửa"
-            android:enabled="false"/>
-
-    </LinearLayout>
+    <!-- Nút xóa điện kế -->
+    <Button
+        android:id="@+id/btnDeleteMeter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xóa Điện Kế"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_delete"/>
 
 </LinearLayout>

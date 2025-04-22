@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/main"
     android:padding="16dp">
 
     <!-- Tiêu đề -->
@@ -17,48 +17,52 @@
         android:gravity="center"
         android:paddingBottom="16dp"/>
 
-    <!-- Tìm kiếm bậc giá điện -->
+    <!-- Tìm kiếm bảng giá -->
     <EditText
-        android:id="@+id/edtSearch"
+        android:id="@+id/edtSearchPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tìm kiếm theo bậc giá hoặc khoảng điện"
+        android:hint="Tìm kiếm theo tên bảng giá, ngày áp dụng"
         android:padding="12dp"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:drawableLeft="@android:drawable/ic_menu_search"/>
 
-    <!-- Danh sách giá điện -->
+    <!-- Danh sách bảng giá -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvView"
+        android:id="@+id/rvPriceList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="16dp"/>
+        android:paddingTop="16dp" />
 
-    <!-- Nút thêm bậc giá điện mới -->
+    <!-- Nút thêm bảng giá mới -->
     <Button
-        android:id="@+id/btnGia"
+        android:id="@+id/btnAddPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm Bậc Giá Điện Mới"
+        android:text="Thêm Bảng Giá Mới"
         android:layout_marginTop="16dp"
-        android:onClick="onAddPrice"/>
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_add"/>
 
-    <!-- Nút cập nhật bậc giá điện -->
+    <!-- Nút cập nhật bảng giá -->
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/btnUpdatePrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cập Nhật Giá Điện"
+        android:text="Cập Nhật Bảng Giá"
         android:layout_marginTop="8dp"
-        android:onClick="onUpdatePrice"/>
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_edit"/>
 
-    <!-- Nút xóa bậc giá điện -->
+    <!-- Nút xem chi tiết mức giá -->
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnViewPriceDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Xóa Bậc Giá Điện"
+        android:text="Xem Chi Tiết Mức Giá"
         android:layout_marginTop="8dp"
-        android:onClick="onDeletePrice"/>
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:drawableLeft="@android:drawable/ic_menu_info_details"/>
 
 </LinearLayout>
