@@ -16,10 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".Activities.CTDienkeActivity"
+            android:name=".Activities.FormBangGiaActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.CTDienke"
+            android:name=".Activities.QLTrangThaiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.CTDienkeActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.TinhTiendienActivity"

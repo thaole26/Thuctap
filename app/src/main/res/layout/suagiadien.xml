@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm Bậc Giá Điện"
+        android:text="Cập Nhật Bậc Giá Điện"
         android:textSize="22sp"
         android:textStyle="bold"
         android:paddingBottom="16dp"
@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mã bậc"
+        android:enabled="false"
         android:padding="12dp"
-        android:inputType="number"
         android:layout_marginBottom="10dp"/>
 
     <!-- Tên bậc -->
@@ -42,7 +42,7 @@
         android:id="@+id/edtStartKw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Từ số kW"
+        android:hint="Từ số kWh"
         android:padding="12dp"
         android:inputType="number"
         android:layout_marginBottom="10dp"/>
@@ -52,7 +52,7 @@
         android:id="@+id/edtEndKw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Đến số kW"
+        android:hint="Đến số kWh"
         android:padding="13dp"
         android:inputType="number"
         android:layout_marginBottom="10dp"/>
@@ -65,16 +65,6 @@
         android:hint="Đơn giá"
         android:padding="12dp"
         android:inputType="numberDecimal"
-        android:layout_marginBottom="10dp"/>
-
-    <!-- Ngày áp dụng -->
-    <EditText
-        android:id="@+id/edtEffectiveDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ngày áp dụng (dd/MM/yyyy)"
-        android:padding="12dp"
-        android:inputType="date"
         android:layout_marginBottom="10dp"/>
 
     <!-- Thông báo lỗi khi dữ liệu không hợp lệ (ẩn mặc định) -->
@@ -93,7 +83,7 @@
         android:id="@+id/btnSavePriceTier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lưu Bậc Giá"
+        android:text="Lưu Thông Tin"
         android:padding="10dp"
         android:layout_marginTop="10dp"/>
 

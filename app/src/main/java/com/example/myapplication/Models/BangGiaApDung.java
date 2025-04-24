@@ -13,6 +13,15 @@ public class BangGiaApDung {
     public BangGiaApDung() {
     }
 
+    public BangGiaApDung(int id_banggia, String ten_banggia, Date ngay_apdung, Date ngay_ketthuc, byte trangthai, String mota) {
+        this.id_banggia = id_banggia;
+        this.ten_banggia = ten_banggia;
+        this.ngay_apdung = ngay_apdung;
+        this.ngay_ketthuc = ngay_ketthuc;
+        this.trangthai = trangthai;
+        this.mota = mota;
+    }
+
     public int getId_banggia() {
         return id_banggia;
     }

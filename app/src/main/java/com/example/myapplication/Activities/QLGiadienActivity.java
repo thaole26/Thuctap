@@ -1,5 +1,6 @@
 package com.example.myapplication.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -33,7 +36,6 @@ public class QLGiadienActivity extends AppCompatActivity {
     TextView tvTitle;
     EditText edtSearch;
     RecyclerView rvView;
-    Button btnGia, btnUpdate, btnDelete;
     List<MucGiaChiTiet> list;
     GiaDienAdapter adapter;
 
@@ -49,10 +51,11 @@ public class QLGiadienActivity extends AppCompatActivity {
         });
 
         addControls();
+        getAllGiaDien();
         addEvents();
     }
 
-    private void addEvents() {
+    private void getAllGiaDien() {
         APIService apiService = RetrofitClient.getInstance().create(APIService.class);
 
         apiService.getAllGiaDien().enqueue(new Callback<>() {
@@ -72,6 +75,15 @@ public class QLGiadienActivity extends AppCompatActivity {
                 Toast.makeText(QLGiadienActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void addEvents() {
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        getAllGiaDien();
+                    }
+                });
 
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -108,7 +120,6 @@ public class QLGiadienActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         edtSearch = findViewById(R.id.edtSearchPrice);
         rvView = findViewById(R.id.rvPriceList);
-        btnGia = findViewById(R.id.btnAddPrice);
         list = new ArrayList<>();
         adapter = new GiaDienAdapter(list);
         rvView.setAdapter(adapter);

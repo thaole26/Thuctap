@@ -2,7 +2,6 @@ package com.example.myapplication.Activities;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.example.myapplication.APIService;
 import com.example.myapplication.Models.BangGiaApDung;
@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +33,7 @@ public class FormBangGiaActivity extends AppCompatActivity {
     EditText editTextTenBangGia;
     EditText editTextNgayApDung;
     EditText editTextNgayKetThuc;
-    Switch switchTrangThai;
+    SwitchCompat switchTrangThai;
     EditText editTextMoTaBangGia;
     Button buttonLuuBangGia;
     Button buttonHuyBangGia;
@@ -156,10 +157,10 @@ public class FormBangGiaActivity extends AppCompatActivity {
                 bangGia.setId_banggia(idBangGiaToEdit);
                 call = apiService.updateBangGiaApDung(idBangGiaToEdit, bangGia);
             } else {
-                call = apiService.createBangGiaApDung(bangGia);
+                call = apiService.insertBangGia(bangGia);
             }
 
-            call.enqueue(new Callback<BangGiaApDung>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<BangGiaApDung> call, Response<BangGiaApDung> response) {
                     if (response.isSuccessful() && response.body() != null) {

@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         btnPrice.setOnClickListener(view -> {
-            Intent intent = new Intent(MenuActivity.this, QLGiadienActivity.class);
+            Intent intent = new Intent(MenuActivity.this, QLTrangThaiActivity.class);
             startActivity(intent);
         });
 

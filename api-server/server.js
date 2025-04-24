@@ -461,6 +461,164 @@ app.delete('/dienke/:madk', (req, res) => {
     });
 });
 
+// get all banggiaapdung
+app.get('/banggiaapdung', (req, res) => {
+    const sql = `SELECT * FROM bang_gia_ap_dung ORDER BY ngay_apdung DESC`;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error("Lỗi truy vấn:", err);
+            return res.status(500).json({ message: "Lỗi truy vấn bảng giá áp dụng" });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// update giadien
+app.put('/giadien/:id_mucgia', (req, res) => {
+    const id = parseInt(req.params.id_mucgia);
+    const { ten_bac, tu_kwh, den_kwh, don_gia } = req.body;
+
+    if (tu_kwh >= den_kwh) {
+        return res.status(400).json({ message: 'tu_kwh phải nhỏ hơn den_kwh' });
+    }
+
+    const getAllTiers = `SELECT * FROM muc_gia_chi_tiet ORDER BY tu_kwh ASC`;
+
+    db.query(getAllTiers, (err, tiers) => {
+        if (err) return res.status(500).json({ message: 'Lỗi truy vấn', error: err });
+
+        const index = tiers.findIndex(t => t.id_mucgia === id);
+        if (index === -1) return res.status(404).json({ message: 'Không tìm thấy bậc điện' });
+
+        const curr = tiers[index];
+        const prev = tiers[index - 1];
+        const next = tiers[index + 1];
+
+        // ✅ Validation against adjacent tiers
+        if (prev && tu_kwh <= prev.tu_kwh)
+            return res.status(400).json({ message: 'tu_kwh phải lớn hơn tu_kwh của bậc trước' });
+        if (next && den_kwh >= next.den_kwh)
+            return res.status(400).json({ message: 'den_kwh phải nhỏ hơn den_kwh của bậc sau' });
+
+        const queries = [];
+
+        // ✅ Update current tier
+        queries.push({
+            sql: 'UPDATE muc_gia_chi_tiet SET ten_bac = ?, tu_kwh = ?, den_kwh = ?, don_gia = ? WHERE id_mucgia = ?',
+            values: [ten_bac, tu_kwh, den_kwh, don_gia, id]
+        });
+
+        // ✅ Adjust previous tier’s den_kwh
+        if (prev) {
+            queries.push({
+                sql: 'UPDATE muc_gia_chi_tiet SET den_kwh = ? WHERE id_mucgia = ?',
+                values: [tu_kwh - 1, prev.id_mucgia]
+            });
+        }
+
+        // ✅ Adjust next tier’s tu_kwh
+        if (next) {
+            queries.push({
+                sql: 'UPDATE muc_gia_chi_tiet SET tu_kwh = ? WHERE id_mucgia = ?',
+                values: [den_kwh + 1, next.id_mucgia]
+            });
+        }
+
+        // ✅ Run all updates
+        const runUpdates = queries.map(q =>
+            new Promise((resolve, reject) => {
+                db.query(q.sql, q.values, (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                });
+            })
+        );
+
+        Promise.all(runUpdates)
+            .then(() => res.status(200).json({ message: 'Cập nhật bậc thành công và điều chỉnh liền kề' }))
+            .catch(e => {
+                console.error(e);
+                res.status(500).json({ message: 'Lỗi khi cập nhật bậc hoặc liền kề', error: e });
+            });
+    });
+});
+
+// get banggiaapdung by id_banggia
+app.get('/banggiaapdung/:id_banggia', (req, res) => {
+    const id_banggia = req.params.id_banggia;
+
+    db.query('SELECT * FROM bang_gia_ap_dung WHERE id_banggia = ?', [id_banggia], (err, results) => {
+        if (err) {
+            console.error("Lỗi khi lấy bảng giá:", err);
+            return res.status(500).json({ message: "Lỗi truy vấn" });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: "Không tìm thấy bảng giá" });
+        }
+
+        res.status(200).json(results[0]);
+    });
+});
+
+// update banggiaapdung
+app.put('/banggiaapdung/:id_banggia', (req, res) => {
+    const id_banggia = req.params.id_banggia;
+    const { ten_banggia, ngay_apdung, ngay_ketthuc, trangthai, mota } = req.body;
+
+    if (!ten_banggia || !ngay_apdung || trangthai === undefined) {
+        return res.status(400).json({ message: 'Thiếu thông tin cần thiết' });
+    }
+
+    const sql = `
+        UPDATE bang_gia_ap_dung
+        SET ten_banggia = ?, ngay_apdung = ?, ngay_ketthuc = ?, trangthai = ?, mota = ?
+        WHERE id_banggia = ?
+    `;
+
+    db.query(sql, [ten_banggia, ngay_apdung, ngay_ketthuc || null, trangthai, mota || null, id_banggia], (err, result) => {
+        if (err) {
+            console.error("Lỗi cập nhật:", err);
+            return res.status(500).json({ message: 'Lỗi cập nhật bảng giá' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Không tìm thấy bảng giá để cập nhật' });
+        }
+
+        return res.status(200).json({ message: 'Cập nhật bảng giá thành công' });
+    });
+});
+
+// add new banggiaapdung
+app.post('/banggiaapdung', (req, res) => {
+    const { ten_banggia, ngay_apdung, ngay_ketthuc, trangthai, mota } = req.body;
+
+    if (!ten_banggia || !ngay_apdung || trangthai === undefined) {
+        return res.status(400).json({ message: 'Thiếu thông tin bắt buộc' });
+    }
+
+    const sql = `
+        INSERT INTO bang_gia_ap_dung 
+        (ten_banggia, ngay_apdung, ngay_ketthuc, trangthai, mota)
+        VALUES (?, ?, ?, ?, ?)
+    `;
+
+    db.query(sql, [ten_banggia, ngay_apdung, ngay_ketthuc || null, trangthai, mota || null], (err, result) => {
+        if (err) {
+            console.error('Lỗi khi thêm bảng giá:', err);
+            return res.status(500).json({ message: 'Không thể thêm bảng giá' });
+        }
+
+        return res.status(201).json({ 
+            message: 'Thêm bảng giá thành công', 
+            id_banggia: result.insertId 
+        });
+    });
+});
+
 app.listen(3000, '0.0.0.0', () => {
     console.log('🚀 Server running on http://0.0.0.0:3000');
 });

@@ -22,7 +22,7 @@
         android:id="@+id/edtSearchPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tìm kiếm theo tên bảng giá, ngày áp dụng"
+        android:hint="Tìm kiếm theo bậc giá hoặc khoảng điện"
         android:padding="12dp"
         android:inputType="text"
         android:drawableLeft="@android:drawable/ic_menu_search"/>
@@ -35,35 +35,5 @@
         android:layout_weight="1"
         android:contentDescription="Muc gia chi tiet"
         android:paddingTop="16dp" />
-
-    <!-- Nút thêm bảng giá mới -->
-    <Button
-        android:id="@+id/btnAddPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thêm Bảng Giá Mới"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_add"/>
-
-    <!-- Nút cập nhật bảng giá -->
-    <Button
-        android:id="@+id/btnUpdatePrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cập Nhật Bảng Giá"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_edit"/>
-
-    <!-- Nút xem chi tiết mức giá -->
-    <Button
-        android:id="@+id/btnViewPriceDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Xem Chi Tiết Mức Giá"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_info_details"/>
 
 </LinearLayout>

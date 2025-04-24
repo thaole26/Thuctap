@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import com.example.myapplication.Models.BangGiaApDung;
 import com.example.myapplication.Models.DienKe;
 import com.example.myapplication.Models.HoaDon;
 import com.example.myapplication.Models.MucGiaChiTiet;
@@ -68,5 +69,17 @@ public interface APIService {
 
     @DELETE("/dienke/{madk}")
     Call<ResponseBody> xoaDienKe(@Path("madk") String madk);
+
+    @GET("/banggiaapdung")
+    Call<List<BangGiaApDung>> getAllBangGiaApDung();
+
+    @GET("/banggiaapdung/{id}")
+    Call<BangGiaApDung> getBangGiaApDungById(@Path("id_banggia") int id_banggia);
+
+    @PUT("/banggiaapdung/{id_banggia}")
+    Call<BangGiaApDung> updateBangGiaApDung(@Path("id_banggia") int id, @Body BangGiaApDung banggia);
+
+    @POST("/banggiaapdung")
+    Call<BangGiaApDung> insertBangGia(@Body BangGiaApDung banggia);
 
 }
