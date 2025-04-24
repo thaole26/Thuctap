@@ -48,12 +48,5 @@
             android:layout_height="wrap_content"
             android:text="Đơn giá:"
             android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_ngayapdung"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ngày áp dụng:"
-            android:textSize="16sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

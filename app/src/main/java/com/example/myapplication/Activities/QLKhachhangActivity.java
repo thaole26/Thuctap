@@ -62,6 +62,18 @@ public class QLKhachhangActivity extends AppCompatActivity {
                 }
         });
 
+        adapter.setOnItemClickListener(kh -> {
+            Intent intent = new Intent(QLKhachhangActivity.this, CTKhachhangActivity.class);
+            intent.putExtra("makh", kh.getMakh());
+            intent.putExtra("tenkh", kh.getTenkh());
+            intent.putExtra("diachi", kh.getDiachi());
+            intent.putExtra("dt", kh.getDt());
+            intent.putExtra("cmnd", kh.getCmnd());
+            launcher.launch (intent);
+        });
+        rvCustomerList.setAdapter(adapter);
+        rvCustomerList.setLayoutManager(new LinearLayoutManager(this));
+
         edtSearchCustomer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -82,14 +94,6 @@ public class QLKhachhangActivity extends AppCompatActivity {
             launcher.launch(intent);
         });
 
-        btnDeleteCustomer.setOnClickListener(view -> {
-
-        });
-
-        btnUpdateCustomer.setOnClickListener(view -> {
-            Intent intent = new Intent(QLKhachhangActivity.this, ThemKhachhangActivity.class);
-            startActivity(intent);
-        });
     }
 
     private void getAllKhachHang() {
@@ -100,8 +104,7 @@ public class QLKhachhangActivity extends AppCompatActivity {
             public void onResponse(Call<List<KhachHang>> call, Response<List<KhachHang>> response) {
                 if (response.isSuccessful()) {
                     list = response.body();
-                    adapter = new KhachHangAdapter(list);
-                    rvCustomerList.setAdapter(adapter);
+                    adapter.updateList(response.body());
                 } else {
                     Toast.makeText(QLKhachhangActivity.this, "Lỗi: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -117,12 +120,9 @@ public class QLKhachhangActivity extends AppCompatActivity {
     private void addControls() {
         edtSearchCustomer = findViewById(R.id.edtSearchCustomer);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
-        btnUpdateCustomer = findViewById(R.id.btnUpdateCustomer);
-        btnDeleteCustomer = findViewById(R.id.btnDeleteCustomer);
         rvCustomerList = findViewById(R.id.rvCustomerList);
         list = new ArrayList<>();
         adapter = new KhachHangAdapter(list);
-        rvCustomerList.setAdapter(adapter);
-        rvCustomerList.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }

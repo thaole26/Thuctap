@@ -1,8 +1,10 @@
 package com.example.myapplication.Adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.ViewHolder> {
-    private final List<KhachHang> originalList;
-    private final List<KhachHang> filteredList;
+    private List<KhachHang> originalList;
+    private List<KhachHang> filteredList;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(KhachHang khachHang);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public KhachHangAdapter(List<KhachHang> list) {
         this.originalList = list;
@@ -37,6 +48,13 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
         holder.diachi.setText("Địa chỉ: " + kh.getDiachi());
         holder.sdt.setText("SĐT: " + kh.getDt());
         holder.cmnd.setText("CMND: " + kh.getCmnd());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                Log.d("Adapter", "Item clicked: " + kh.getMakh()); // debug
+                listener.onItemClick(kh);
+            }
+        });
     }
 
     @Override
@@ -58,6 +76,13 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
         }
         notifyDataSetChanged();
     }
+
+    public void updateList(List<KhachHang> newList) {
+        originalList = newList;
+        filteredList = new ArrayList<>(newList); // if you use filtering
+        notifyDataSetChanged();
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView makh, tenkh, diachi, sdt, cmnd;

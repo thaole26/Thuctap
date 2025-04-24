@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="#50CBF6">
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +24,6 @@
             android:layout_height="wrap_content"
             android:text="Mã ĐK"
             android:textStyle="bold"
-            app:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="?attr/colorPrimary"
             android:layout_marginBottom="8dp" />
 
         <!-- Mã KH -->
@@ -32,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mã KH"
-            app:textAppearance="?attr/textAppearanceBody1"
             android:layout_marginBottom="8dp" />
 
         <!-- Ngày Sản Xuất -->
@@ -41,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày Sản Xuất"
-            app:textAppearance="?attr/textAppearanceBody1"
             android:layout_marginBottom="8dp" />
 
         <!-- Divider for visual separation -->
@@ -52,7 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày Lắp"
-            app:textAppearance="?attr/textAppearanceBody1"
             android:layout_marginBottom="8dp" />
 
         <!-- Mô tả -->
@@ -61,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mô tả"
-            app:textAppearance="?attr/textAppearanceBody1"
             android:layout_marginBottom="8dp" />
 
         <!-- Trạng thái -->
@@ -69,8 +65,7 @@
             android:id="@+id/tvTrangThai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trạng thái"
-            app:textAppearance="?attr/textAppearanceBody1" />
+            android:text="Trạng thái" />
 
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

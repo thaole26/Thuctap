@@ -1,17 +1,11 @@
 package com.example.myapplication.Models;
 
 public class CTHoaDon {
-
     private final int id_cthd;
-
     private final String mahd;
-
-    private final int mabac;
-
+    private final int id_mucgia;
     private final int dntt_bac;
-
     private final double dongia_apdung;
-
     private final double thanhtien_bac;
 
 
@@ -21,7 +15,7 @@ public class CTHoaDon {
 
         this.mahd = mahd;
 
-        this.mabac = mabac;
+        this.id_mucgia = mabac;
 
         this.dntt_bac = dntt_bac;
 
@@ -46,9 +40,9 @@ public class CTHoaDon {
     }
 
 
-    public int getMabac() {
+    public int getId_mucgia() {
 
-        return mabac;
+        return id_mucgia;
 
     }
 

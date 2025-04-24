@@ -1,52 +1,77 @@
 package com.example.myapplication.Adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Models.DienKe;
 import com.example.myapplication.R;
-
 import java.util.List;
 
-public class DienKeAdapter extends ArrayAdapter<DienKe> {
-    private Context context;
+public class DienKeAdapter extends RecyclerView.Adapter<DienKeAdapter.DienKeViewHolder> {
+
     private List<DienKe> dienKeList;
 
-    public DienKeAdapter(Context context, List<DienKe> dienKeList) {
-        super(context, 0, dienKeList);
-        this.context = context;
+    public DienKeAdapter(List<DienKe> dienKeList) {
         this.dienKeList = dienKeList;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(DienKe dienKe);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        DienKe dienKe = getItem(position);
+    public DienKeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dienke, parent, false);
+        return new DienKeViewHolder(view);
+    }
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_dienke, parent, false);
+    @Override
+    public void onBindViewHolder(@NonNull DienKeViewHolder holder, int position) {
+        DienKe dk = dienKeList.get(position);
+        holder.tvMaDK.setText("Mã ĐK: " + dk.getMadk());
+        holder.tvMaKH.setText("Mã KH: " + dk.getMakh());
+        holder.tvNgaySX.setText("Ngày SX: " + dk.getNgaysx());
+        holder.tvNgayLap.setText("Ngày Lắp: " + dk.getNgaylap());
+        holder.tvMota.setText("Mô tả: " + dk.getMota());
+        holder.tvTrangThai.setText("Trạng thái: " + (dk.getTrangthai() == 1 ? "Đang hoạt động" : "Ngưng hoạt động"));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(dk);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return dienKeList.size();
+    }
+
+    public void updateList(List<DienKe> newList) {
+        this.dienKeList = newList;
+        notifyDataSetChanged();
+    }
+
+    public static class DienKeViewHolder extends RecyclerView.ViewHolder {
+        TextView tvMaDK, tvMaKH, tvNgaySX, tvNgayLap, tvMota, tvTrangThai;
+
+        public DienKeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvMaDK = itemView.findViewById(R.id.tvMaDienKe);
+            tvMaKH = itemView.findViewById(R.id.tvMaKH);
+            tvNgaySX = itemView.findViewById(R.id.tvNgaySX);
+            tvNgayLap = itemView.findViewById(R.id.tvNgayLap);
+            tvMota = itemView.findViewById(R.id.tvMota);
+            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
         }
-
-        TextView tvMaDienKe = convertView.findViewById(R.id.tvMaDienKe);
-        TextView tvMaKH = convertView.findViewById(R.id.tvMaKH);
-        TextView tvNgaySX = convertView.findViewById(R.id.tvNgaySX);
-        TextView tvNgayLap = convertView.findViewById(R.id.tvNgayLap);
-        TextView tvMota = convertView.findViewById(R.id.tvMota);
-        TextView tvTrangThai = convertView.findViewById(R.id.tvTrangThai);
-
-        tvMaDienKe.setText("Mã ĐK: " + dienKe.getMadk());
-        tvMaKH.setText("Mã KH: " + dienKe.getMakh());
-        tvNgaySX.setText("Ngày SX: " + dienKe.getNgaysx());
-        tvNgayLap.setText("Ngày Lắp: " + dienKe.getNgaylap());
-        tvMota.setText("Mô tả: " + dienKe.getMota());
-        tvTrangThai.setText("Trạng thái: " + (dienKe.getTrangthai() == 1 ? "Đang hoạt động" : "Ngưng hoạt động"));
-
-        return convertView;
     }
 }

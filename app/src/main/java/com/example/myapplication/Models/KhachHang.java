@@ -24,7 +24,6 @@ public class KhachHang {
         return tenkh;
     }
 
-
     public String getDiachi() {
         return diachi;
     }

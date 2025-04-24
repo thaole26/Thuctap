@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dienke_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvDienKeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chi tiết điện kế"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <!-- Mã điện kế -->
+    <EditText
+        android:id="@+id/edtDienKeId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã điện kế"
+        android:padding="12dp"
+        android:enabled="false"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Mã khách hàng -->
+    <EditText
+        android:id="@+id/edtDienKeCustomerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã khách hàng"
+        android:padding="12dp"
+        android:enabled="false"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Ngày sản xuất -->
+    <EditText
+        android:id="@+id/edtNgaysx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày sản xuất (dd/MM/yyyy)"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Ngày lắp đặt -->
+    <EditText
+        android:id="@+id/edtNgaylap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày lắp đặt (dd/MM/yyyy)"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Mô tả -->
+    <EditText
+        android:id="@+id/edtMota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Trạng thái -->
+    <EditText
+        android:id="@+id/edtTrangthai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Trạng thái (0 hoặc 1)"
+        android:padding="12dp"
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Lỗi -->
+    <TextView
+        android:id="@+id/tvUpdateDienkeError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Nút lưu -->
+    <Button
+        android:id="@+id/btnSaveDienKe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sửa thông tin" />
+
+    <!-- Nút quay lại -->
+    <Button
+        android:id="@+id/btnBackDienKe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quay lại"
+        android:layout_marginTop="8dp" />
+
+    <!-- Nút xóa -->
+    <Button
+        android:id="@+id/btnDeleteDienKe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xóa điện kế"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="#DE3131" />
+
+</LinearLayout>

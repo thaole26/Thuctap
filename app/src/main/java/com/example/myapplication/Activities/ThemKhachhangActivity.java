@@ -84,7 +84,7 @@ public class ThemKhachhangActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ThemKhachhangActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThemKhachhangActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
                     finish();
                 } else {

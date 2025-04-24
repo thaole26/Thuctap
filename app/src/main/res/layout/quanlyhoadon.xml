@@ -35,15 +35,15 @@
         android:layout_weight="1"
         android:paddingTop="16dp" />
 
-    <!-- Nút lập hóa đơn mới -->
-    <Button
-        android:id="@+id/btnCreateInvoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lập Hóa Đơn Mới"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_add"/>
+<!--    &lt;!&ndash; Nút lập hóa đơn mới &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/btnCreateInvoice"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Lập Hóa Đơn Mới"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:backgroundTint="@color/design_default_color_secondary_variant"-->
+<!--        android:drawableLeft="@android:drawable/ic_menu_add"/>-->
 
     <!-- Nút tính tiền điện -->
     <Button

@@ -3,27 +3,16 @@ package com.example.myapplication.Models;
 public class HoaDon {
 
     private final String mahd;
-
     private final String madk;
-
     private final String ky;
-
     private final String tungay;
-
     private final String denngay;
-
     private final int chisodau;
-
     private final int chisocuoi;
-
     private final double tongthanhtien;
-
     private final String ngaylapHD;
-
     private final int tinhtrang;
-
     private final String ghichu;
-
     private final int manv_ghi;
 
 

@@ -1,18 +1,22 @@
 package com.example.myapplication;
 
 import com.example.myapplication.Models.DienKe;
-import com.example.myapplication.Models.GiaDien;
+import com.example.myapplication.Models.HoaDon;
+import com.example.myapplication.Models.MucGiaChiTiet;
 import com.example.myapplication.Models.KhachHang;
 import com.example.myapplication.Requests.DienKeRequest;
+import com.example.myapplication.Requests.HoaDonRequest;
 import com.example.myapplication.Requests.KhachHangRequest;
 import com.example.myapplication.Requests.LoginRequest;
 import com.example.myapplication.Requests.RegisterRequest;
+import com.example.myapplication.Requests.TinhTienRequest;
 
 import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -33,7 +37,10 @@ public interface APIService {
     Call<List<DienKe>> getAllDienKe();
 
     @GET("giadien")
-    Call<List<GiaDien>> getAllGiaDien();
+    Call<List<MucGiaChiTiet>> getAllGiaDien();
+
+    @GET("/hoadon")
+    Call<List<HoaDon>> getAllHoaDon();
 
     @POST("khachhang")
     Call<ResponseBody> themKhachHang(@Body KhachHangRequest request);
@@ -43,5 +50,23 @@ public interface APIService {
 
     @POST("/dienke")
     Call<ResponseBody> themDienKe(@Body DienKeRequest request);
+
+    @GET("/dienke/{madk}/chisodau")
+    Call<Integer> getChiSoDau(@Path("madk") String madk);
+
+    @POST("/tinh-tien")
+    Call<Double> tinhtiendien(@Body TinhTienRequest request);
+
+    @POST("/hoadon")
+    Call<ResponseBody> taoHoadon(@Body HoaDonRequest request);
+
+    @DELETE("/khachhang/{makh}")
+    Call<ResponseBody> xoaKhachHang(@Path("makh") String makh);
+
+    @PUT("/dienke/{madk}")
+    Call<ResponseBody> suaDienKe(@Path("madk") String madk, @Body DienKe dienKe);
+
+    @DELETE("/dienke/{madk}")
+    Call<ResponseBody> xoaDienKe(@Path("madk") String madk);
 
 }

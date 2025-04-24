@@ -17,6 +17,9 @@ public class DienKe {
         this.trangthai = trangthai;
     }
 
+    public DienKe() {
+    }
+
     public String getMadk() {
         return madk;
     }
@@ -39,5 +42,29 @@ public class DienKe {
 
     public int getTrangthai() {
         return trangthai;
+    }
+
+    public void setMadk(String madk) {
+        this.madk = madk;
+    }
+
+    public void setMakh(String makh) {
+        this.makh = makh;
+    }
+
+    public void setNgaysx(String ngaysx) {
+        this.ngaysx = ngaysx;
+    }
+
+    public void setNgaylap(String ngaylap) {
+        this.ngaylap = ngaylap;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
     }
 }

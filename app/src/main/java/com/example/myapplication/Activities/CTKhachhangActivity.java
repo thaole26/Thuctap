@@ -26,16 +26,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuaKhachhangActivity extends AppCompatActivity {
+public class CTKhachhangActivity extends AppCompatActivity {
     private EditText edtCustomerId, edtCustomerName, edtCustomerPhone, edtCustomerAddress, edtCustomerIDNumber;
-    private Button btnSaveUpdatedCustomer, btnBack;
+    private Button btnSaveUpdatedCustomer, btnBack, btnDeleteCustomer;
     private TextView tvErrorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.suakhachhang);
+        setContentView(R.layout.chitietkhachhang);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.update_customer_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -53,6 +53,7 @@ public class SuaKhachhangActivity extends AppCompatActivity {
         edtCustomerIDNumber = findViewById(R.id.edtUpdateCustomerIDNumber);
         btnSaveUpdatedCustomer = findViewById(R.id.btnSaveUpdatedCustomer);
         btnBack = findViewById(R.id.btnBack);
+        btnDeleteCustomer = findViewById(R.id.btnDeleteCustomer);
         tvErrorMessage = findViewById(R.id.tvUpdateErrorMessage);
 
         Intent intent = getIntent();
@@ -88,7 +89,8 @@ public class SuaKhachhangActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(SuaKhachhangActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CTKhachhangActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
                         finish();
                     } else {
                         try {
@@ -111,5 +113,29 @@ public class SuaKhachhangActivity extends AppCompatActivity {
 
         // Back button
         btnBack.setOnClickListener(v -> finish());
+
+        btnDeleteCustomer.setOnClickListener(v -> {
+            String makh = getIntent().getStringExtra("makh");
+
+            APIService api = RetrofitClient.getInstance().create(APIService.class);
+            api.xoaKhachHang(makh).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(CTKhachhangActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        Toast.makeText(CTKhachhangActivity.this, "Lỗi khi xóa", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(CTKhachhangActivity.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+
     }
 }

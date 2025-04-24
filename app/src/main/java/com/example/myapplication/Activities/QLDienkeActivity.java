@@ -15,11 +15,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.APIService;
 import com.example.myapplication.Adapters.DienKeAdapter;
 import com.example.myapplication.Models.DienKe;
-import com.example.myapplication.Models.KhachHang;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
 
@@ -33,7 +33,7 @@ import retrofit2.Response;
 public class QLDienkeActivity extends AppCompatActivity {
     EditText edtSearchMeter;
     Button btnAddMeter, btnEditMeter, btnDeleteMeter;
-    ListView lvMeters;
+    RecyclerView rvMeters;
     List<DienKe> list;
     DienKeAdapter adapter;
 
@@ -60,9 +60,8 @@ public class QLDienkeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<DienKe>> call, Response<List<DienKe>> response) {
                 if (response.isSuccessful()) {
-                    List<DienKe> list = response.body();
-                    adapter = new DienKeAdapter(QLDienkeActivity.this, list);
-                    lvMeters.setAdapter(adapter);
+                    list = response.body();
+                    adapter.updateList(response.body());
                 } else {
                     Toast.makeText(QLDienkeActivity.this, "Lỗi: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -83,6 +82,21 @@ public class QLDienkeActivity extends AppCompatActivity {
                     }
                 });
 
+        adapter = new DienKeAdapter(list);
+        adapter.setOnItemClickListener(dk -> {
+            Intent intent = new Intent(this, CTDienkeActivity.class);
+            intent.putExtra("madk", dk.getMadk());
+            intent.putExtra("makh", dk.getMakh());
+            intent.putExtra("ngaysx", dk.getNgaysx());
+            intent.putExtra("ngaylap", dk.getNgaylap());
+            intent.putExtra("mota", dk.getMota());
+            intent.putExtra("trangthai", dk.getTrangthai());
+            launcher.launch(intent);
+        });
+
+        rvMeters.setAdapter(adapter);
+        rvMeters.setLayoutManager(new LinearLayoutManager(this));
+
         btnAddMeter.setOnClickListener(view -> {
             Intent intent = new Intent(QLDienkeActivity.this, ThemDienkeActivity.class);
             launcher.launch(intent);
@@ -92,10 +106,8 @@ public class QLDienkeActivity extends AppCompatActivity {
     private void addControls() {
         edtSearchMeter = findViewById(R.id.edtSearchMeter);
         btnAddMeter = findViewById(R.id.btnAddMeter);
-        btnEditMeter = findViewById(R.id.btnEditMeter);
-        lvMeters = findViewById(R.id.lvMeters);
+        rvMeters = findViewById(R.id.rvMeterList);
         list = new ArrayList<>();
-        adapter = new DienKeAdapter(this,list);
-        lvMeters.setAdapter(adapter);
+
     }
 }

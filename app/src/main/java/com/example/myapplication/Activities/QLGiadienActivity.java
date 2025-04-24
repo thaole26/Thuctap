@@ -18,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.APIService;
 import com.example.myapplication.Adapters.GiaDienAdapter;
-import com.example.myapplication.Adapters.KhachHangAdapter;
-import com.example.myapplication.Models.GiaDien;
-import com.example.myapplication.Models.KhachHang;
+import com.example.myapplication.Models.MucGiaChiTiet;
 import com.example.myapplication.R;
 import com.example.myapplication.RetrofitClient;
 
@@ -36,7 +34,7 @@ public class QLGiadienActivity extends AppCompatActivity {
     EditText edtSearch;
     RecyclerView rvView;
     Button btnGia, btnUpdate, btnDelete;
-    List<GiaDien> list;
+    List<MucGiaChiTiet> list;
     GiaDienAdapter adapter;
 
     @Override
@@ -59,7 +57,7 @@ public class QLGiadienActivity extends AppCompatActivity {
 
         apiService.getAllGiaDien().enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<List<GiaDien>> call, Response<List<GiaDien>> response) {
+            public void onResponse(Call<List<MucGiaChiTiet>> call, Response<List<MucGiaChiTiet>> response) {
                 if (response.isSuccessful()) {
                     list = response.body();
                     adapter = new GiaDienAdapter(list);
@@ -70,7 +68,7 @@ public class QLGiadienActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<GiaDien>> call, Throwable t) {
+            public void onFailure(Call<List<MucGiaChiTiet>> call, Throwable t) {
                 Toast.makeText(QLGiadienActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -81,18 +79,18 @@ public class QLGiadienActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String query = s.toString().trim();
-                List<GiaDien> filteredList = new ArrayList<>();
+                List<MucGiaChiTiet> filteredList = new ArrayList<>();
 
-                for (GiaDien item : list) {
-                    if (String.valueOf(item.getMabac()).contains(query)) {
+                for (MucGiaChiTiet item : list) {
+                    if (String.valueOf(item.getId_mucgia()).contains(query)) {
                         filteredList.add(item);
                     } else {
                         try {
                             int input = Integer.parseInt(query);
-                            if (item.getTusokw()>item.getDensokw() && input >= item.getTusokw()) {
+                            if (item.getTu_kwh()>item.getDen_kwh() && input >= item.getTu_kwh()) {
                                 filteredList.add(item);
                             } else
-                            if (input >= item.getTusokw() && input <= item.getDensokw()) {
+                            if (input >= item.getTu_kwh() && input <= item.getDen_kwh()) {
                                 filteredList.add(item);
                             }
                         } catch (NumberFormatException ignored) {}
@@ -108,11 +106,9 @@ public class QLGiadienActivity extends AppCompatActivity {
 
     private void addControls() {
         tvTitle = findViewById(R.id.tvTitle);
-        edtSearch = findViewById(R.id.edtSearch);
-        rvView = findViewById(R.id.rvView);
-        btnGia = findViewById(R.id.btnGia);
-        btnUpdate = findViewById(R.id.btnUpdate);
-        btnDelete = findViewById(R.id.btnDelete);
+        edtSearch = findViewById(R.id.edtSearchPrice);
+        rvView = findViewById(R.id.rvPriceList);
+        btnGia = findViewById(R.id.btnAddPrice);
         list = new ArrayList<>();
         adapter = new GiaDienAdapter(list);
         rvView.setAdapter(adapter);

@@ -46,23 +46,7 @@
         android:drawableLeft="@android:drawable/ic_menu_add"/>
 
     <!-- Nút cập nhật thông tin điện kế -->
-    <Button
-        android:id="@+id/btnUpdateMeter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cập Nhật Thông Tin Điện Kế"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_edit"/>
 
     <!-- Nút xóa điện kế -->
-    <Button
-        android:id="@+id/btnDeleteMeter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Xóa Điện Kế"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_delete"/>
 
 </LinearLayout>
