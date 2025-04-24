@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <TextView
+        android:id="@+id/textViewFormBangGiaTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm/Sửa Thông tin Bảng Giá"
+        android:textSize="18sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+    <EditText
+        android:id="@+id/editTextTenBangGia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên bảng giá (ví dụ: Bảng giá 2026)" android:layout_marginBottom="8dp"
+        android:inputType="textCapWords" android:autofillHints="name"
+        android:minHeight="48dp"
+        tools:text="Bảng giá hiện hành 2025"/>
+    <EditText
+        android:id="@+id/editTextNgayApDung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày áp dụng (YYYY-MM-DD)"
+        android:focusable="false" android:clickable="true" android:layout_marginBottom="8dp"
+        android:inputType="date" android:autofillHints="date"
+        android:minHeight="48dp"
+        tools:text="2025-01-01"/>
+    <EditText
+        android:id="@+id/editTextNgayKetThuc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày kết thúc (để trống nếu đang áp dụng)"
+        android:focusable="false" android:clickable="true" android:layout_marginBottom="8dp"
+        android:inputType="date" android:autofillHints="date"
+        android:minHeight="48dp"
+        tools:text=""/>
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchTrangThai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đang hoạt động/Áp dụng"
+        android:checked="true" android:layout_marginBottom="16dp"
+        android:minHeight="48dp" />
+    <EditText
+        android:id="@+id/editTextMoTaBangGia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả (tùy chọn)"
+        android:inputType="textMultiLine"
+        android:minLines="2" android:gravity="top" android:layout_marginBottom="16dp"
+        tools:text="Giá điện áp dụng từ đầu năm 2025"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+        <Button android:id="@+id/buttonLuuBangGia" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Lưu"/>
+        <Button android:id="@+id/buttonHuyBangGia" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="8dp" style="?android:attr/buttonBarButtonStyle" android:text="Hủy"/>
+    </LinearLayout>
+</LinearLayout>
