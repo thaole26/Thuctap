@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.QLGiadienActivity"> <androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbarQuanLyGia"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:title="Xem Bảng Giá Điện" />
+    tools:context=".Activities.QLGiadienActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarQuanLyGia"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Quản Lý Giá Điện" />
 
     <LinearLayout
         android:id="@+id/layoutFilter"
@@ -60,15 +62,40 @@
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
         android:paddingTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
         android:contentDescription="Danh sách giá điện"
-        tools:listitem="@layout/item_bang_gia" /> <Button
-        android:id="@+id/buttonThemBangGiaMoi"
+        tools:listitem="@layout/item_bang_gia" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="Thêm Bảng Giá Mới"/>
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp">
+
+        <Button
+            android:id="@+id/buttonThemBangGiaMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm bảng giá áp dụng"/>
+
+        <Button
+            android:id="@+id/buttonSuaBangGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Sửa bảng giá áp dụng"/>
+
+        <Button
+            android:id="@+id/buttonXoaBangGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Xóa bảng giá áp dụng"/>
+
+    </LinearLayout>
 
 </LinearLayout>

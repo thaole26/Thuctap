@@ -40,44 +40,5 @@
             android:textStyle="italic"
             tools:text="Trạng thái: Đang sử dụng" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <Button
-                android:id="@+id/buttonItemXemSuaMucGia"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sửa Mức Giá"
-                android:textSize="12sp"/>
-
-            <Button
-                android:id="@+id/buttonItemSuaBangGia"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Sửa Trạng Thái" android:textSize="12sp"/>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <ImageButton
-                android:id="@+id/buttonItemXoaBangGia"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                android:src="@android:drawable/ic_menu_delete"
-                android:contentDescription="Xóa bảng giá"
-                android:layout_gravity="center_vertical"
-                android:background="?attr/selectableItemBackgroundBorderless"/>
-
-        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
