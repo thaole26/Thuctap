@@ -3,7 +3,6 @@ package com.example.myapplication.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -36,7 +35,6 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
     RecyclerView recyclerViewDanhSachGia;
     Button buttonThemBangGiaMoi;
     Button buttonSuaBangGia;
-    Button buttonXoaBangGia;
 
     List<BangGiaApDung> listBangGia;
     BangGiaApDungAdapter adapter;
@@ -60,7 +58,6 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
         recyclerViewDanhSachGia.setLayoutManager(new LinearLayoutManager(this));
         buttonThemBangGiaMoi = findViewById(R.id.buttonThemBangGiaMoi);
         buttonSuaBangGia = findViewById(R.id.buttonSuaBangGia);
-        buttonXoaBangGia = findViewById(R.id.buttonXoaBangGia);
 
         listBangGia = new ArrayList<>();
         adapter = new BangGiaApDungAdapter(this, listBangGia, this);
@@ -101,9 +98,8 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
     private void addEvents() {
         buttonXemGiaTheoNam.setOnClickListener(v -> {
             int selectedYear = (int) spinnerChonNamXem.getSelectedItem();
-            // Gọi API để lọc danh sách bảng giá theo năm (cần implement API này)
             Toast.makeText(this, "Xem giá năm " + selectedYear, Toast.LENGTH_SHORT).show();
-            // Sau khi có dữ liệu lọc, cập nhật adapter: adapter.updateList(filteredList);
+            // TODO: Gọi API để lọc danh sách bảng giá theo năm
         });
 
         buttonThemBangGiaMoi.setOnClickListener(v -> {
@@ -112,22 +108,19 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
         });
 
         buttonSuaBangGia.setOnClickListener(v -> {
-            // Cần xử lý logic để biết bảng giá nào đang được chọn để sửa
-            Toast.makeText(this, "Chức năng sửa bảng giá (cần chọn item)", Toast.LENGTH_SHORT).show();
-            // Chúng ta có thể xử lý việc chọn item bằng cách giữ lâu (long click) trên RecyclerView item
-        });
-
-        buttonXoaBangGia.setOnClickListener(v -> {
-            // Cần xử lý logic để biết bảng giá nào đang được chọn để xóa
-            Toast.makeText(this, "Chức năng xóa bảng giá (cần chọn item)", Toast.LENGTH_SHORT).show();
-            // Tương tự, có thể dùng long click để chọn item
+            int selectedId = adapter.getSelectedItemId();
+            if (selectedId != -1) {
+                Intent intent = new Intent(QLTrangThaiActivity.this, FormBangGiaActivity.class);
+                intent.putExtra("id_banggia_edit", selectedId);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vui lòng chọn một bảng giá để sửa (nhấn vào item)", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     @Override
     public void onItemClick(BangGiaApDung bangGia) {
-        Intent intent = new Intent(QLTrangThaiActivity.this, QLGiadienActivity.class);
-        intent.putExtra("id_banggia", bangGia.getId_banggia());
-        startActivity(intent);
+        adapter.setSelectedPosition(listBangGia.indexOf(bangGia));
     }
 }
