@@ -56,23 +56,7 @@
         android:drawableLeft="@android:drawable/ic_menu_edit"/>
 
     <!-- Nút xem chi tiết hóa đơn -->
-    <Button
-        android:id="@+id/btnViewInvoiceDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Xem Chi Tiết Hóa Đơn"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_info_details"/>
 
     <!-- Nút xóa hóa đơn -->
-    <Button
-        android:id="@+id/btnDeleteInvoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Xóa Hóa Đơn"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
-        android:drawableLeft="@android:drawable/ic_menu_delete"/>
 
 </LinearLayout>

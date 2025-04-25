@@ -12,6 +12,7 @@ app.use(express.json());
 
 //Encrypt password
 const bcrypt = require('bcrypt');
+const e = require('express');
 const saltRounds = 10;
 
 // MySQL connection
@@ -273,11 +274,17 @@ app.post('/tinh-tien', (req, res) => {
         return res.status(400).json({ message: 'Số kWh không hợp lệ' });
     }
 
-    const query = 'SELECT * FROM muc_gia_chi_tiet ORDER BY tu_kwh ASC';
+    const query = `SELECT * FROM muc_gia_chi_tiet
+                    WHERE id_banggia = (
+                        SELECT id_banggia
+                        FROM bang_gia_ap_dung
+                        WHERE trangthai = 1
+                        ORDER BY ngay_apdung DESC
+                        LIMIT 1
+                    ) ORDER BY tu_kwh ASC`;
 
     db.query(query, (err, tiers) => {
         if (err) return res.status(500).json({ message: 'Lỗi truy vấn bảng giá điện' });
-
         let remaining = sokwh;
         let total = 0;
 
@@ -304,7 +311,17 @@ app.post('/hoadon', (req, res) => {
         ngaylaphd, tinhtrang
     } = req.body;
 
-    db.query('SELECT * FROM muc_gia_chi_tiet ORDER BY tu_kwh ASC', (err, tiers) => {
+    const query = `SELECT * FROM muc_gia_chi_tiet
+                    WHERE id_banggia = (
+                        SELECT id_banggia
+                        FROM bang_gia_ap_dung
+                        WHERE trangthai = 1
+                        ORDER BY ngay_apdung DESC
+                        LIMIT 1
+                    ) ORDER BY tu_kwh ASC`;
+
+    db.query(query, (err, tiers) => {
+        console.log(tiers);
         if (err) return res.status(500).json({ message: 'Lỗi lấy bảng giá' });
 
         let remaining = chisocuoi - chisodau; // số kWh tiêu thụ
@@ -342,8 +359,10 @@ app.post('/hoadon', (req, res) => {
             mahd, madk, ky, tungay, denngay, chisodau, chisocuoi,
             tongthanhtien, ngaylaphd, tinhtrang
         ], (err) => {
-            if (err) return res.status(500).json({ message: 'Lỗi thêm hoadon', error: err });
-
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ message: 'Lỗi thêm hoadon', error: err });
+            }
             // Step 2: insert cthoadon
             const insertCT = `
                 INSERT INTO cthoadon (mahd, id_mucgia, dntt_bac, dongia_apdung, thanhtien_bac)
@@ -619,9 +638,49 @@ app.post('/banggiaapdung', (req, res) => {
             return res.status(500).json({ message: 'Không thể thêm bảng giá' });
         }
 
-        return res.status(201).json({ 
-            message: 'Thêm bảng giá thành công', 
-            id_banggia: result.insertId 
+        const newBangGiaId = result.insertId;
+
+        const latestTiersSql = `
+            SELECT * FROM muc_gia_chi_tiet 
+            WHERE id_banggia = (
+                SELECT id_banggia FROM bang_gia_ap_dung 
+                ORDER BY id_banggia DESC LIMIT 1 OFFSET 1
+            )
+        `;
+
+        db.query(latestTiersSql, (err2, tiers) => {
+            if (err2) {
+                console.error("Lỗi lấy bậc gần nhất:", err2);
+                return res.status(500).json({ message: 'Không thể lấy bảng giá gần nhất để sao chép' });
+            }
+
+            if (tiers.length === 0) {
+                return res.status(200).json({ message: 'Thêm bảng giá thành công (không có bậc để sao chép)', id_banggia: newBangGiaId });
+            }
+
+            // ✅ Build insert data: id_banggia, bac, ten_bac, tu_kwh, den_kwh, don_gia
+            const insertTiersSql = `
+                INSERT INTO muc_gia_chi_tiet (id_banggia, bac, ten_bac, tu_kwh, den_kwh, don_gia)
+                VALUES ?
+            `;
+
+            const values = tiers.map(t => [
+                newBangGiaId,
+                t.bac,
+                t.ten_bac,
+                t.tu_kwh,
+                t.den_kwh,
+                t.don_gia
+            ]);
+
+            db.query(insertTiersSql, [values], (err3) => {
+                if (err3) {
+                    console.error("Lỗi khi thêm các bậc mặc định:", err3);
+                    return res.status(500).json({ message: 'Bảng giá được thêm nhưng không thể sao chép bậc' });
+                }
+
+                return res.status(201).json({ message: 'Thêm bảng giá + sao chép bậc thành công', id_banggia: newBangGiaId });
+            });
         });
     });
 });

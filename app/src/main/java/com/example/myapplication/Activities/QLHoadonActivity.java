@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -53,6 +55,13 @@ public class QLHoadonActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        fetchHoaDonList();
+                    }
+                });
+
         edtSearchInvoice.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -61,12 +70,8 @@ public class QLHoadonActivity extends AppCompatActivity {
             @Override public void afterTextChanged(Editable s) {}
         });
 
-//        btnCreate.setOnClickListener(v -> {
-//            startActivity(new Intent(QLHoadonActivity.this, TaoHoadonActivity.class));
-//        });
-
         btnCalculate.setOnClickListener(v -> {
-            startActivity(new Intent(QLHoadonActivity.this, TinhTiendienActivity.class));
+            launcher.launch(new Intent(QLHoadonActivity.this, TinhTiendienActivity.class));
         });
     }
 
@@ -98,8 +103,6 @@ public class QLHoadonActivity extends AppCompatActivity {
         rvInvoiceList = findViewById(R.id.rvInvoiceList);
         //btnCreate = findViewById(R.id.btnCreateInvoice);
         btnCalculate = findViewById(R.id.btnCalculateBill);
-        btnViewDetail = findViewById(R.id.btnViewInvoiceDetails);
-        btnDelete = findViewById(R.id.btnDeleteInvoice);
         adapter = new HoaDonAdapter(hoaDonList);
         rvInvoiceList.setLayoutManager(new LinearLayoutManager(this));
         rvInvoiceList.setAdapter(adapter);
