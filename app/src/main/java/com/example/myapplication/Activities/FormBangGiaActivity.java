@@ -165,6 +165,7 @@ public class FormBangGiaActivity extends AppCompatActivity {
                 public void onResponse(Call<BangGiaApDung> call, Response<BangGiaApDung> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         Toast.makeText(FormBangGiaActivity.this, (idBangGiaToEdit != -1 ? "Cập nhật" : "Thêm") + " bảng giá thành công", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
                         finish(); // Quay lại màn hình trước
                     } else {
                         Toast.makeText(FormBangGiaActivity.this, "Lỗi khi " + (idBangGiaToEdit != -1 ? "cập nhật" : "thêm") + " bảng giá", Toast.LENGTH_SHORT).show();

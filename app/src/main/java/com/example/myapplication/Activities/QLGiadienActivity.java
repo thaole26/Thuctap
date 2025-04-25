@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.APIService;
-import com.example.myapplication.Adapters.GiaDienAdapter;
 import com.example.myapplication.Models.MucGiaChiTiet;
 import com.example.myapplication.R;
+import com.example.myapplication.Adapters.MucGiaChiTietAdapter;
 import com.example.myapplication.RetrofitClient;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class QLGiadienActivity extends AppCompatActivity {
     EditText edtSearch;
     RecyclerView rvView;
     List<MucGiaChiTiet> list;
-    GiaDienAdapter adapter;
+    MucGiaChiTietAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +55,15 @@ public class QLGiadienActivity extends AppCompatActivity {
     }
 
     private void getAllGiaDien() {
+        int id_banggia = getIntent().getIntExtra("id_banggia",0);
         APIService apiService = RetrofitClient.getInstance().create(APIService.class);
 
-        apiService.getAllGiaDien().enqueue(new Callback<>() {
+        apiService.getAllGiaDienByBangGiaID(id_banggia).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<MucGiaChiTiet>> call, Response<List<MucGiaChiTiet>> response) {
                 if (response.isSuccessful()) {
                     list = response.body();
-                    adapter = new GiaDienAdapter(list);
-                    rvView.setAdapter(adapter);
+                    adapter.updateList(response.body());
                 } else {
                     Toast.makeText(QLGiadienActivity.this, "Lỗi: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -79,11 +78,25 @@ public class QLGiadienActivity extends AppCompatActivity {
 
     private void addEvents() {
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(), result -> {
-                    if (result.getResultCode() == RESULT_OK) {
-                        getAllGiaDien();
-                    }
-                });
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    getAllGiaDien();
+                }
+            });
+
+        adapter.setOnItemClickListener(giaDien -> {
+            Intent intent = new Intent(this, SuaGiaDienActivity.class);
+            intent.putExtra("id_mucgia", giaDien.getId_mucgia());
+            intent.putExtra("id_banggia", giaDien.getId_banggia());
+            intent.putExtra("bac", giaDien.getBac());
+            intent.putExtra("tenbac", giaDien.getTen_bac());
+            intent.putExtra("tu_kwh", giaDien.getTu_kwh());
+            intent.putExtra("den_kwh", giaDien.getDen_kwh());
+            intent.putExtra("dongia", giaDien.getDon_gia());
+            launcher.launch(intent);
+        });
+        rvView.setAdapter(adapter);
+        rvView.setLayoutManager(new LinearLayoutManager(this));
 
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -121,8 +134,6 @@ public class QLGiadienActivity extends AppCompatActivity {
         edtSearch = findViewById(R.id.edtSearchPrice);
         rvView = findViewById(R.id.rvPriceList);
         list = new ArrayList<>();
-        adapter = new GiaDienAdapter(list);
-        rvView.setAdapter(adapter);
-        rvView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MucGiaChiTietAdapter(list);
     }
 }

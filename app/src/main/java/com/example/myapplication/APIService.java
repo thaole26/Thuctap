@@ -9,6 +9,7 @@ import com.example.myapplication.Requests.DienKeRequest;
 import com.example.myapplication.Requests.HoaDonRequest;
 import com.example.myapplication.Requests.KhachHangRequest;
 import com.example.myapplication.Requests.LoginRequest;
+import com.example.myapplication.Requests.MucGiaChiTietRequest;
 import com.example.myapplication.Requests.RegisterRequest;
 import com.example.myapplication.Requests.TinhTienRequest;
 
@@ -37,8 +38,8 @@ public interface APIService {
     @GET("dienke")
     Call<List<DienKe>> getAllDienKe();
 
-    @GET("giadien")
-    Call<List<MucGiaChiTiet>> getAllGiaDien();
+    @GET("/giadien/{id_banggia}")
+    Call<List<MucGiaChiTiet>> getAllGiaDienByBangGiaID(@Path("id_banggia") int id_banggia);
 
     @GET("/hoadon")
     Call<List<HoaDon>> getAllHoaDon();
@@ -73,7 +74,7 @@ public interface APIService {
     @GET("/banggiaapdung")
     Call<List<BangGiaApDung>> getAllBangGiaApDung();
 
-    @GET("/banggiaapdung/{id}")
+    @GET("/banggiaapdung/{id_banggia}")
     Call<BangGiaApDung> getBangGiaApDungById(@Path("id_banggia") int id_banggia);
 
     @PUT("/banggiaapdung/{id_banggia}")
@@ -82,4 +83,9 @@ public interface APIService {
     @POST("/banggiaapdung")
     Call<BangGiaApDung> insertBangGia(@Body BangGiaApDung banggia);
 
+    @PUT("/giadien/{id_mucgia}")
+    Call<ResponseBody> updateTier(@Path("id_mucgia") int id_mucgia, @Body MucGiaChiTietRequest request);
+
+    @GET("/banggiaapdung/year/{year}")
+    Call<List<BangGiaApDung>> getBangGiaByYear(@Path("year") int year);
 }

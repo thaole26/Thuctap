@@ -119,8 +119,9 @@ app.get('/dienke', (req, res) => {
 });
 
 // GET all giadien
-app.get('/giadien', (req, res) => {
-    db.query('SELECT * FROM muc_gia_chi_tiet', (err, result) => {
+app.get('/giadien/:id_banggia', (req, res) => {
+    const id_banggia = req.params.id_banggia;
+    db.query('SELECT * FROM muc_gia_chi_tiet WHERE id_banggia = ? ORDER BY bac ASC',[id_banggia], (err, result) => {
         if (err) return res.status(500).json({ error: 'Lỗi truy vấn dữ liệu' });
 
         // Format date fields
@@ -572,13 +573,16 @@ app.put('/banggiaapdung/:id_banggia', (req, res) => {
         return res.status(400).json({ message: 'Thiếu thông tin cần thiết' });
     }
 
+    const formattedNgayApDung = dayjs(ngay_apdung).format("YYYY-MM-DD");
+    const formattedNgayKetThuc = ngay_ketthuc ? dayjs(ngay_ketthuc).format("YYYY-MM-DD") : null;
+
     const sql = `
         UPDATE bang_gia_ap_dung
         SET ten_banggia = ?, ngay_apdung = ?, ngay_ketthuc = ?, trangthai = ?, mota = ?
         WHERE id_banggia = ?
     `;
 
-    db.query(sql, [ten_banggia, ngay_apdung, ngay_ketthuc || null, trangthai, mota || null, id_banggia], (err, result) => {
+    db.query(sql, [ten_banggia, formattedNgayApDung, formattedNgayKetThuc || null, trangthai, mota || null, id_banggia], (err, result) => {
         if (err) {
             console.error("Lỗi cập nhật:", err);
             return res.status(500).json({ message: 'Lỗi cập nhật bảng giá' });
@@ -600,13 +604,16 @@ app.post('/banggiaapdung', (req, res) => {
         return res.status(400).json({ message: 'Thiếu thông tin bắt buộc' });
     }
 
+    const formattedNgayApDung = dayjs(ngay_apdung).format("YYYY-MM-DD");
+    const formattedNgayKetThuc = ngay_ketthuc ? dayjs(ngay_ketthuc).format("YYYY-MM-DD") : null;
+
     const sql = `
         INSERT INTO bang_gia_ap_dung 
         (ten_banggia, ngay_apdung, ngay_ketthuc, trangthai, mota)
         VALUES (?, ?, ?, ?, ?)
     `;
 
-    db.query(sql, [ten_banggia, ngay_apdung, ngay_ketthuc || null, trangthai, mota || null], (err, result) => {
+    db.query(sql, [ten_banggia, formattedNgayApDung, formattedNgayKetThuc || null, trangthai, mota || null], (err, result) => {
         if (err) {
             console.error('Lỗi khi thêm bảng giá:', err);
             return res.status(500).json({ message: 'Không thể thêm bảng giá' });
@@ -616,6 +623,26 @@ app.post('/banggiaapdung', (req, res) => {
             message: 'Thêm bảng giá thành công', 
             id_banggia: result.insertId 
         });
+    });
+});
+
+// get banggiaapdung by year
+app.get('/banggiaapdung/year/:year', (req, res) => {
+    const year = req.params.year;
+
+    const sql = `
+        SELECT * FROM bang_gia_ap_dung
+        WHERE YEAR(ngay_apdung) = ? OR YEAR(ngay_ketthuc) = ?
+        ORDER BY ngay_apdung DESC
+    `;
+
+    db.query(sql, [year, year], (err, results) => {
+        if (err) {
+            console.error("Lỗi khi lọc bảng giá theo năm:", err);
+            return res.status(500).json({ message: "Không thể lấy dữ liệu bảng giá" });
+        }
+
+        res.status(200).json(results);
     });
 });
 

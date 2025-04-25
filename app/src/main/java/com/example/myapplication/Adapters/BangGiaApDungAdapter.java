@@ -3,6 +3,7 @@ package com.example.myapplication.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class BangGiaApDungAdapter extends RecyclerView.Adapter<BangGiaApDungAdap
         }
 
         holder.itemView.setOnClickListener(v -> {
+            Log.d("position", selectedPosition+" "+position);
             int previousPosition = selectedPosition;
             selectedPosition = holder.getAdapterPosition();
             notifyItemChanged(previousPosition);

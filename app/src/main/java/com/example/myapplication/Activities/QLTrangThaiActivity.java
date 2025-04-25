@@ -9,6 +9,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -96,15 +98,23 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
     }
 
     private void addEvents() {
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        loadDanhSachBangGia();
+                    }
+                });
+
         buttonXemGiaTheoNam.setOnClickListener(v -> {
             int selectedYear = (int) spinnerChonNamXem.getSelectedItem();
             Toast.makeText(this, "Xem giá năm " + selectedYear, Toast.LENGTH_SHORT).show();
             // TODO: Gọi API để lọc danh sách bảng giá theo năm
+            getBangGiaForYear(selectedYear);
         });
 
         buttonThemBangGiaMoi.setOnClickListener(v -> {
             Intent intent = new Intent(QLTrangThaiActivity.this, FormBangGiaActivity.class);
-            startActivity(intent);
+            launcher.launch(intent);
         });
 
         buttonSuaBangGia.setOnClickListener(v -> {
@@ -112,7 +122,7 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
             if (selectedId != -1) {
                 Intent intent = new Intent(QLTrangThaiActivity.this, FormBangGiaActivity.class);
                 intent.putExtra("id_banggia_edit", selectedId);
-                startActivity(intent);
+                launcher.launch(intent);
             } else {
                 Toast.makeText(this, "Vui lòng chọn một bảng giá để sửa (nhấn vào item)", Toast.LENGTH_SHORT).show();
             }
@@ -123,4 +133,26 @@ public class QLTrangThaiActivity extends AppCompatActivity implements BangGiaApD
     public void onItemClick(BangGiaApDung bangGia) {
         adapter.setSelectedPosition(listBangGia.indexOf(bangGia));
     }
+
+    private void getBangGiaForYear(int year) {
+        APIService api = RetrofitClient.getInstance().create(APIService.class);
+        api.getBangGiaByYear(year).enqueue(new Callback<List<BangGiaApDung>>() {
+            @Override
+            public void onResponse(Call<List<BangGiaApDung>> call, Response<List<BangGiaApDung>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listBangGia = response.body();
+                    adapter = new BangGiaApDungAdapter(QLTrangThaiActivity.this, listBangGia, QLTrangThaiActivity.this); // create new adapter
+                    recyclerViewDanhSachGia.setAdapter(adapter);
+                } else {
+                    Toast.makeText(QLTrangThaiActivity.this, "Không tìm thấy bảng giá cho năm " + year, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BangGiaApDung>> call, Throwable t) {
+                Toast.makeText(QLTrangThaiActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
