@@ -1,6 +1,7 @@
 package com.example.myapplication.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -131,6 +132,7 @@ public class TinhTiendienActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(TinhTiendienActivity.this, "Lưu hoá đơn thành công!", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
                         finish();
                     } else {
                         Toast.makeText(TinhTiendienActivity.this, "Lỗi khi lưu hoá đơn", Toast.LENGTH_SHORT).show();
