@@ -196,6 +196,8 @@ app.post('/dienke', (req, res) => {
             const format = 'DD/MM/YYYY';
             const parsedNgaySX = dayjs(ngaysx, format);
             const parsedNgayLap = dayjs(ngaylap, format);
+            if (parsedNgaySX > parsedNgayLap) return res.status(400).json({ message: 'Ngày lắp bé hơn ngày sx' });
+
             // Parse and format with dayjs
             if (!parsedNgaySX.isValid() || !parsedNgayLap.isValid()) {
                 return res.status(400).json({ message: 'Ngày không hợp lệ. Định dạng đúng là dd/MM/yyyy' });
@@ -441,6 +443,7 @@ app.put('/dienke/:madk', (req, res) => {
 
     const formattedNgaysx = dayjs(ngaysx, 'DD/MM/YYYY').format('YYYY-MM-DD');
     const formattedNgaylap = dayjs(ngaylap, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    if (formattedNgaysx > formattedNgaylap) return res.status(400).json({ message: 'Ngày lắp bé hơn ngày sx' });
 
     const sql = `
         UPDATE dienke
