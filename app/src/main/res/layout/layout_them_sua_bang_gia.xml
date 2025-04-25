@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         android:text="Đang hoạt động/Áp dụng"
         android:checked="true" android:layout_marginBottom="16dp"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        />
     <EditText
         android:id="@+id/editTextMoTaBangGia"
         android:layout_width="match_parent"
@@ -55,7 +56,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:orientation="horizontal">
-        <Button android:id="@+id/buttonLuuBangGia" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Lưu"/>
+        <Button android:id="@+id/buttonLuuBangGia" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Lưu" android:backgroundTint="#6D6D6D"/>
         <Button android:id="@+id/buttonHuyBangGia" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="8dp" style="?android:attr/buttonBarButtonStyle" android:text="Hủy"/>
     </LinearLayout>
 </LinearLayout>

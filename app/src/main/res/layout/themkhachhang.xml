@@ -82,7 +82,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lưu Khách Hàng"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        />
 
     <!-- Nút quay lại -->
     <Button
@@ -90,6 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Quay Lại"
+        android:backgroundTint="#6D6D6D"
+
         android:layout_marginTop="8dp"/>
 
 </LinearLayout>

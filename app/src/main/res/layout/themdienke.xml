@@ -102,7 +102,9 @@
         android:layout_height="wrap_content"
         android:text="Lưu Điện Kế"
         android:padding="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        />
 
     <!-- Nút quay lại -->
     <Button
@@ -111,6 +113,8 @@
         android:layout_height="wrap_content"
         android:text="Quay Lại"
         android:padding="10dp"
+        android:backgroundTint="#6D6D6D"
+
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

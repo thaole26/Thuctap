@@ -13,7 +13,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Quản Lý Giá Điện" />
+        app:title="Quản Lý Giá Điện"
+        android:backgroundTint="#6D6D6D"/>
 
     <LinearLayout
         android:id="@+id/layoutFilter"
@@ -41,7 +42,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Xem"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#6D6D6D"
+
+            />
     </LinearLayout>
 
     <TextView
@@ -80,13 +84,17 @@
             android:id="@+id/buttonThemBangGiaMoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thêm bảng giá áp dụng"/>
+            android:text="Thêm bảng giá áp dụng"
+            android:backgroundTint="@color/design_default_color_secondary_variant"
+            />
 
         <Button
             android:id="@+id/buttonSuaBangGia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/design_default_color_secondary_variant"
+
             android:text="Sửa bảng giá áp dụng"/>
 
 

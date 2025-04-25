@@ -89,7 +89,9 @@
         android:id="@+id/btnSaveDienKe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sửa thông tin" />
+        android:text="Sửa thông tin"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        />
 
     <!-- Nút quay lại -->
     <Button
@@ -97,7 +99,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Quay lại"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        />
 
     <!-- Nút xóa -->
     <Button
@@ -106,6 +110,6 @@
         android:layout_height="wrap_content"
         android:text="Xóa điện kế"
         android:layout_marginTop="64dp"
-        android:backgroundTint="#DE3131" />
+        android:backgroundTint="#6D6D6D" />
 
 </LinearLayout>
