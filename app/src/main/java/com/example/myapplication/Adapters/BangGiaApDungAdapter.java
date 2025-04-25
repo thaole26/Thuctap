@@ -3,6 +3,7 @@ package com.example.myapplication.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,10 @@ public class BangGiaApDungAdapter extends RecyclerView.Adapter<BangGiaApDungAdap
     private OnItemClickListener listener;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private int selectedPosition = RecyclerView.NO_POSITION;
+
+    private static final long DOUBLE_CLICK_TIME_DELTA = 300; // Thời gian tối đa giữa hai lần nhấp (milliseconds)
+    private long lastClickTime = 0;
+    private int lastClickedPosition = RecyclerView.NO_POSITION;
 
     public interface OnItemClickListener {
         void onItemClick(BangGiaApDung bangGia);
@@ -69,17 +74,27 @@ public class BangGiaApDungAdapter extends RecyclerView.Adapter<BangGiaApDungAdap
         }
 
         holder.itemView.setOnClickListener(v -> {
-            Log.d("position", selectedPosition+" "+position);
-            int previousPosition = selectedPosition;
-            selectedPosition = holder.getAdapterPosition();
-            notifyItemChanged(previousPosition);
-            notifyItemChanged(selectedPosition);
-            listener.onItemClick(bangGia);
-
-            // Chuyển sang QLGiaDienActivity khi nhấn vào item
-            Intent intent = new Intent(context, QLGiadienActivity.class);
-            intent.putExtra("id_banggia", bangGia.getId_banggia()); // Truyền ID bảng giá
-            context.startActivity(intent);
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                long clickTime = System.currentTimeMillis();
+                if (adapterPosition == lastClickedPosition && clickTime - lastClickTime <= DOUBLE_CLICK_TIME_DELTA) {
+                    // Double click detected
+                    Intent intent = new Intent(context, QLGiadienActivity.class);
+                    intent.putExtra("id_banggia", bangGiaList.get(adapterPosition).getId_banggia());
+                    context.startActivity(intent);
+                } else {
+                    // Single click
+                    int previousPosition = selectedPosition;
+                    selectedPosition = adapterPosition;
+                    notifyItemChanged(previousPosition);
+                    notifyItemChanged(selectedPosition);
+                    if (listener != null) {
+                        listener.onItemClick(bangGiaList.get(adapterPosition));
+                    }
+                }
+                lastClickTime = clickTime;
+                lastClickedPosition = adapterPosition;
+            }
         });
     }
 
